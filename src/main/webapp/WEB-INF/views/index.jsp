@@ -39,6 +39,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
         <!-- END THEME STYLES -->
 
+
+
         <link rel="shortcut icon" href="app/img/favicon.ico" />
     </head>
     <!-- END HEAD -->
@@ -108,72 +110,91 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </li>
 
                         <li class="start active">
-                            <a href="rest/page/dashboard" id="btn-dashboard">
+                            <a href="rest/page/mainInfo" id="btn-dashboard">
                                 <i class="fa fa-home"></i><span class="title"> 首页 </span><span
                                 class="selected"> </span>
                             </a>
                         </li>
 
                         <li class="">
-                            <a href="javascript:;">
-                                <i class="fa fa-gears"></i><span class="title"> 系统管理 </span><span
+                            <a href="rest/page/deviceManager">
+                                <i class="fa fa-gears"></i><span class="title"> 客户设备台账 </span><span
                                 class="arrow "> </span>
                             </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="javascript:;">
-                                        用户管理
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        角色管理
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        权限管理
-                                    </a>
-                                </li>
-                            </ul>
+                            <%--<ul class="sub-menu">--%>
+                                <%--<li>--%>
+                                    <%--<a href="javascript:;">--%>
+                                        <%--用户管理--%>
+                                    <%--</a>--%>
+                                <%--</li>--%>
+                                <%--<li>--%>
+                                    <%--<a href="javascript:;">--%>
+                                        <%--角色管理--%>
+                                    <%--</a>--%>
+                                <%--</li>--%>
+                                <%--<li>--%>
+                                    <%--<a href="javascript:;">--%>
+                                        <%--权限管理--%>
+                                    <%--</a>--%>
+                                <%--</li>--%>
+                            <%--</ul>--%>
                         </li>
 
                         <li class="">
-                            <a href="javascript:;">
-                                <i class="fa fa-user"></i><span class="title"> 个人中心 </span><span
+                            <a href="rest/page/engineerManager">
+                                <i class="fa fa-user"></i><span class="title"> 现场运维工程师管理 </span><span
                                 class="arrow "> </span>
+                            </a>
+                            <%--<ul class="sub-menu">--%>
+                                <%--<li>--%>
+                                    <%--<a href="javascript:;">--%>
+                                        <%--信息修改--%>
+                                    <%--</a>--%>
+                                <%--</li>--%>
+                                <%--<li>--%>
+                                    <%--<a href="javascript:;">--%>
+                                        <%--密码修改--%>
+                                    <%--</a>--%>
+                                <%--</li>--%>
+                                <%----%>
+                                <%--<!-- 测试权限控制 -->--%>
+                                <%--<shiro:hasAnyRoles name="super_admin">--%>
+                                    <%--<li>--%>
+                                        <%--<a href="javascript:;">super_admin 拥有此角色</a>--%>
+                                    <%--</li>--%>
+                                <%--</shiro:hasAnyRoles>--%>
+                                <%----%>
+                                <%--<shiro:hasPermission name="user:create">--%>
+                                    <%--<li>--%>
+                                        <%--<a href="javascript:;">user:create 拥有此权限</a>--%>
+                                    <%--</li>--%>
+                                <%--</shiro:hasPermission>--%>
+                                <%----%>
+                                <%--<shiro:hasPermission name="user:update">--%>
+                                    <%--<li>--%>
+                                        <%--<a href="javascript:;">user:update 拥有此权限</a>--%>
+                                    <%--</li>--%>
+                                <%--</shiro:hasPermission>--%>
+     <%----%>
+                            <%--</ul>--%>
+                        </li>
+
+                        <li class="">
+                            <a href="rest/page/historyJobManager">
+                                <i class="fa fa-gears"></i><span class="title"> 工单管理 </span><span
+                                    class="arrow "> </span>
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="javascript:;">
-                                        信息修改
+                                    <a href="rest/page/historyJobManager">
+                                        历史工单
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
-                                        密码修改
+                                    <a href="rest/page/todoJobManager">
+                                        待完成工单
                                     </a>
                                 </li>
-                                
-                                <!-- 测试权限控制 -->
-                                <shiro:hasAnyRoles name="super_admin">
-                                    <li>
-                                        <a href="javascript:;">super_admin 拥有此角色</a>
-                                    </li>
-                                </shiro:hasAnyRoles>
-                                
-                                <shiro:hasPermission name="user:create">
-                                    <li>
-                                        <a href="javascript:;">user:create 拥有此权限</a>
-                                    </li>
-                                </shiro:hasPermission>
-                                
-                                <shiro:hasPermission name="user:update">
-                                    <li>
-                                        <a href="javascript:;">user:update 拥有此权限</a>
-                                    </li>
-                                </shiro:hasPermission>
-     
                             </ul>
                         </li>
 
@@ -308,11 +329,24 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 <span class="go-top"><i class="fa fa-angle-up"></i></span>
             </div>
         </div>
+        <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+        <script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script src="assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+        <script src="assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+        <script src="assets/global/scripts/datatable.js" type="text/javascript"></script>
+        <script src="assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+        <script src="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
         <!--[if lt IE 9]>
         <script src="assets/plugins/respond.min.js"></script>
         <script src="assets/plugins/excanvas.min.js"></script>
         <![endif]-->
-        <script src="assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <%--<script src="assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>--%>
         <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
         <script src="assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -321,12 +355,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
         <script src="assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
         <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-
         <script src="assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="assets/plugins/select2/select2.min.js"></script>
 
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script type="text/javascript" src="app/js/index.js"></script>
+
 
         <!-- <script data-main="app/js/main" src="app/lib/requirejs/require.js"></script> -->
     </body>

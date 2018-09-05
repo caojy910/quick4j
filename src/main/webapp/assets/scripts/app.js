@@ -1127,6 +1127,12 @@ var App = function() {
             return isRTL;
         },
 
+                // check IE8 mode
+        isAngularJsApp: function() {
+            return (typeof angular == 'undefined') ? false : true;
+        },
+
+
         // get layout color code by color name
         getLayoutColorCode : function(name) {
             if (layoutColorCodes[name]) {
