@@ -53,34 +53,24 @@
                                     <h4 class="modal-title">Modal Title</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <script type="text/javascript">
-                                        function sub() {
-                                            // jquery 表单提交
-                                            $("#adddevicesub").submit(function(message) {
-                                                // 对于表单提交成功后处理，message为返回内容
-                                            });
-
-                                            return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-                                        }
-                                    </script>
-                                    <form id="adddevicesub" class="form-horizontal form-bordered" action="rest/page/adddevice" method="post" target="id_iframe">
+                                    <form id="adddevicesub" class="form-horizontal form-bordered" action="rest/page/adddevice" method="post" onsubmit="return ajaxsubmitadddevice();">
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">设备代码</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" maxlength="25" name="code" id="maxlength_defaultconfig">
+                                                    <input type="text" class="form-control" maxlength="25" name="code" id="form_code">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">设备名称</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" maxlength="25" name="name" id="maxlength_thresholdconfig">
+                                                    <input type="text" class="form-control" maxlength="25" name="name" id="form_name">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">所属企业</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" maxlength="25" name="company" id="maxlength_alloptions">
+                                                    <input type="text" class="form-control" maxlength="25" name="company" id="form_company">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -94,7 +84,7 @@
                                                         <%--});--%>
                                                     <%--</script>--%>
                                                     <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-                                                        <input type="text" class="form-control" readonly="" name="deliverytime">
+                                                        <input type="text" class="form-control" readonly="" name="deliverytime" id="form_deliverytime">
                                                         <span class="input-group-btn">
                                                             <button class="btn default" type="button">
                                                                 <i class="fa fa-calendar"></i>
@@ -106,7 +96,7 @@
                                             <div class="form-group last">
                                                 <label class="control-label col-md-3">运维期限</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" maxlength="25" name="endtime" id="maxlength_placement">
+                                                    <input type="text" class="form-control" maxlength="25" name="endtime" id="form_endtime">
                                                 </div>
                                             </div>
                                         </div>
@@ -120,8 +110,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
-
                                 </div>
                             </div>
                             <!-- /.modal-content -->

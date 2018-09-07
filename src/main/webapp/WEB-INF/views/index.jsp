@@ -360,6 +360,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script type="text/javascript" src="app/js/index.js"></script>
+        <script type="text/javascript" src="app/js/myjs.js"></script>
 
 
         <!-- <script data-main="app/js/main" src="app/lib/requirejs/require.js"></script> -->

@@ -1,11 +1,12 @@
 package com.eliteams.quick4j.web.dao;
 
+import com.eliteams.quick4j.core.generic.GenericDao;
 import com.eliteams.quick4j.web.model.Job;
 import com.eliteams.quick4j.web.model.JobExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface JobMapper {
+public interface JobMapper extends GenericDao<Job, Long> {
     int countByExample(JobExample example);
 
     int deleteByExample(JobExample example);

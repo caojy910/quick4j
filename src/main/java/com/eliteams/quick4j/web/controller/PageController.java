@@ -2,8 +2,11 @@ package com.eliteams.quick4j.web.controller;
 
 import com.eliteams.quick4j.web.model.Device;
 import com.eliteams.quick4j.web.model.Engineer;
+import com.eliteams.quick4j.web.model.Job;
+import com.eliteams.quick4j.web.model.JobExample;
 import com.eliteams.quick4j.web.service.DeviceService;
 import com.eliteams.quick4j.web.service.EngineerService;
+import com.eliteams.quick4j.web.service.JobService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +35,8 @@ public class PageController {
     private DeviceService deviceService;
     @Resource
     private EngineerService engineerService;
+    @Resource
+    private JobService jobService;
 
     /**
      * 登录页
@@ -95,24 +101,24 @@ public class PageController {
 
     @RequestMapping(value = "/addlocalengineer", method = RequestMethod.POST)
     public ModelAndView adddlocalengineer(@RequestParam("name") String name, @RequestParam("headimg") String headimg, @RequestParam("number") String number, @RequestParam("company") String company,
-                                  @RequestParam("partment") String partment, @RequestParam("level") int level) {
+                                  @RequestParam("partment") String partment, @RequestParam("level") String level) {
         return addengineer(name, headimg, number, company, partment, level, 0);
 
     }
 
     @RequestMapping(value = "/addremoteengineer", method = RequestMethod.POST)
     public ModelAndView adddremoteengineer(@RequestParam("name") String name, @RequestParam("headimg") String headimg, @RequestParam("number") String number, @RequestParam("company") String company,
-                                          @RequestParam("partment") String partment, @RequestParam("level") int level) {
+                                          @RequestParam("partment") String partment, @RequestParam("level") String level) {
         return addengineer(name, headimg, number, company, partment, level, 1);
     }
 
     private ModelAndView addengineer(String name, String headimg, String number, String company,
-                                     String partment, int level, int type) {
+                                     String partment, String level, int type) {
         Engineer engineer = new Engineer();
         engineer.setName(name);
         engineer.setHeadimg(headimg);
         engineer.setPartment(partment);
-        engineer.setLevel(level);
+        engineer.setLevel(1);
         engineer.setType(type);
         engineerService.insert(engineer);
         List<Engineer> locallist = engineerService.getLocalEngineers();
@@ -125,13 +131,40 @@ public class PageController {
 
     @RequestMapping("/historyJobManager")
     public ModelAndView historyJobManager() {
-        List<Engineer> locallist = engineerService.getLocalEngineers();
-        List<Engineer> remotelist = engineerService.getRemoteEngineers();
-        ModelAndView mav=new ModelAndView("engineerManager");
-        mav.addObject("localengineers", locallist);
-        mav.addObject("remoteengineers", remotelist);
+        List<Job> joblist = jobService.getHistoryJobs();
+        ModelAndView mav=new ModelAndView("jobManager");
+        mav.addObject("jobList", joblist);
         return mav;
     }
+
+    @RequestMapping("/todoJobManager")
+    public ModelAndView todoJobManager() {
+        List<Job> joblist = jobService.getTodoJobs();
+        ModelAndView mav=new ModelAndView("jobManager");
+        mav.addObject("jobList", joblist);
+        return mav;
+    }
+
+    @RequestMapping(value = "/addjob", method = RequestMethod.POST)
+    public ModelAndView addjob(
+//                        @RequestParam("type") String type, @RequestParam("device") String device, @RequestParam("devicecode") String devicecode,
+//                       @RequestParam("company") String company, @RequestParam("desc") String desc, @RequestParam("localengineer") String localengineer,
+//                       @RequestParam("remoteengineer") String remoteengineer, @RequestParam("devicestate") String devicestate,
+//                       @RequestParam("finishtime") String finishtime
+            @RequestParam("desc") String desc
+                    ) {
+        Job job = new Job();
+        job.setCreateTime(new Date());
+        job.setDescription(desc);
+        job.setJobstate(1);
+        jobService.insert(job);
+
+        List<Job> joblist = jobService.getTodoJobs();
+        ModelAndView mav=new ModelAndView("jobManager");
+        mav.addObject("jobList", joblist);
+        return mav;
+    }
+
     /**
      * 404页
      */
