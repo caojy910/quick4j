@@ -55,3 +55,4 @@ $(function() {
 
     $('#btn-dashboard').trigger("click");
 });
+

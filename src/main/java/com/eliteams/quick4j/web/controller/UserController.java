@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.eliteams.quick4j.web.model.User;
 import com.eliteams.quick4j.web.security.PermissionSign;
@@ -100,4 +101,19 @@ public class UserController {
     public String create() {
         return "拥有user:create权限,能访问";
     }
+
+    @RequestMapping(value = "/registeruser", method = RequestMethod.POST)
+    public String registeruser(
+            @RequestParam("username") String username, @RequestParam("password") String password) {
+//        User user = userService.selectByUsername(username);
+//        if (user != null)
+//            return false;
+
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        userService.insert(user);
+        return "login";
+    }
+
 }

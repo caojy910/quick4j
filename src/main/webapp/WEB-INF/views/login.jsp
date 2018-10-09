@@ -122,7 +122,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
 	<!-- BEGIN REGISTRATION FORM -->
-	<form class="register-form" action="index.html" method="post">
+	<form class="register-form" action="" method="post" onsubmit="return ajaxregister();">
 		<h3>注  册</h3>
 		<p>
 			 请输入您的个人信息:
@@ -471,6 +471,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <script src="assets/scripts/login-soft.js" type="text/javascript"></script>
 
 <script src="app/lib/security/sha256.js" type="text/javascript"></script>
+<script type="text/javascript" src="app/js/myjs.js"></script>
+
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 		jQuery(document).ready(function() {     

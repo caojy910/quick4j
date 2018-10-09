@@ -76,14 +76,7 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">交付时间</label>
                                                 <div class="col-md-9">
-                                                    <%--<script>--%>
-                                                        <%--$(function() {--%>
-                                                            <%--$('#date-picker').datepicker({--%>
-                                                                <%--language: 'pt-BR'--%>
-                                                            <%--});--%>
-                                                        <%--});--%>
-                                                    <%--</script>--%>
-                                                    <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                                                    <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control" readonly="" name="deliverytime" id="form_deliverytime">
                                                         <span class="input-group-btn">
                                                             <button class="btn default" type="button">
@@ -96,7 +89,14 @@
                                             <div class="form-group last">
                                                 <label class="control-label col-md-3">运维期限</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" maxlength="25" name="endtime" id="form_endtime">
+                                                    <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd">
+                                                        <input type="text" class="form-control" readonly="" name="deliverytime" id="form_endtime">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn default" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,6 +133,7 @@
                             <th> 运维期限 </th>
                             <th> 设备品牌 </th>
                             <th> 设备型号 </th>
+                            <th> 操作 </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -152,241 +153,11 @@
                                         <td>${device.enddate}</td>
                                         <td>${device.brand}</td>
                                         <td>${device.version}</td>
+                                        <td><button id="device_update" onclick="modifydevice(this)">修改</button>
+                                            <button id="device_delete" onclick="deletedevice(this)">删除</button></td>
                                     </tr>
                                 </c:forEach>
                         </tbody>
-                        <%--<tbody>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1123</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Changing Colors</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Jane </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Hugh Jackman </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-warning"> New </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1134</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Modals popup customization</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Randy </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Marcus Doe </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-info"> Processed </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1144</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Form Input styling</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Samantha </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Marcus Doe </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-success"> Completed </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1243</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Counter skipping numbers</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Daniel </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Marcus Doe </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-default"> Pending </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1276</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Menu not working</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Billy </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Hugh Jackman </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-default"> Pending </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1345</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Changing Colors</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Jane </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Hugh Jackman </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-warning"> New </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1354</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Modals popup customization</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Randy </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Marcus Doe </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-default"> Pending </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1365</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Form Input styling</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Samantha </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Marcus Doe </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-success"> Completed </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1371</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Counter skipping numbers</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Daniel </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Marcus Doe </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-default"> Pending </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--<tr class="odd gradeX">--%>
-                            <%--<td>--%>
-                                <%--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">--%>
-                                    <%--<input type="checkbox" class="checkboxes" value="1" />--%>
-                                    <%--<span></span>--%>
-                                <%--</label>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">1373</a>--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                <%--<a href="app_ticket_details.html">Menu not working</a>--%>
-                            <%--</td>--%>
-                            <%--<td> Billy </td>--%>
-                            <%--<td>--%>
-                                <%--<a href="mailto:customer@gmail.com"> customer@gmail.com </a>--%>
-                            <%--</td>--%>
-                            <%--<td class="center"> 10/12/15 1:45pm </td>--%>
-                            <%--<td> Hugh Jackman </td>--%>
-                            <%--<td>--%>
-                                <%--<span class="label label-sm label-success"> Completed </span>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                        <%--</tbody>--%>
                     </table>
                 </div>
             </div>
@@ -398,3 +169,18 @@
 <script src="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/profile.min.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/table-datatables-managed.js" type="text/javascript"></script>
+
+<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+
+<script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+<script src="assets/global/plugins/moment.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+
+
+<script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+
+<script src="assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>

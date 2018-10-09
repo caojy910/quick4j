@@ -1,5 +1,6 @@
 package com.eliteams.quick4j.web.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Device {
@@ -43,8 +44,11 @@ public class Device {
         this.companyid = companyid;
     }
 
-    public Date getDeliverydate() {
-        return deliverydate;
+    public String getDeliverydate() {
+        if (deliverydate == null)
+            return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(deliverydate);
     }
 
     public void setDeliverydate(Date deliverydate) {
@@ -59,8 +63,11 @@ public class Device {
         this.state = state;
     }
 
-    public Date getEnddate() {
-        return enddate;
+    public String getEnddate() {
+        if (enddate == null)
+            return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(enddate);
     }
 
     public void setEnddate(Date enddate) {

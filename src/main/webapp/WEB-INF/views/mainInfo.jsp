@@ -34,7 +34,7 @@
                 <i class="fa fa-globe"></i>
             </div>
             <div class="details">
-                <div class="number">89</div>
+                <div class="number">${finishJobCount}</div>
                 <div class="desc">累计已完成工单数量</div>
             </div>
             <a class="more" href="#"> View more <i class="m-icon-swapright m-icon-white"></i>
@@ -47,7 +47,7 @@
                 <i class="fa fa-bar-chart-o"></i>
             </div>
             <div class="details">
-                <div class="number">12</div>
+                <div class="number">${todoJobCount}</div>
                 <div class="desc">待完成工单数量</div>
             </div>
             <a class="more" href="#"> View more <i class="m-icon-swapright m-icon-white"></i>

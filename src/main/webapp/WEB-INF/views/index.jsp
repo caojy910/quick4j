@@ -39,6 +39,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
         <!-- END THEME STYLES -->
 
+        <link href="assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 
 
         <link rel="shortcut icon" href="app/img/favicon.ico" />

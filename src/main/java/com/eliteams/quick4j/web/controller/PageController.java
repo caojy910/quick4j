@@ -1,9 +1,7 @@
 package com.eliteams.quick4j.web.controller;
 
-import com.eliteams.quick4j.web.model.Device;
-import com.eliteams.quick4j.web.model.Engineer;
-import com.eliteams.quick4j.web.model.Job;
-import com.eliteams.quick4j.web.model.JobExample;
+import com.eliteams.quick4j.core.util.SessionUtils;
+import com.eliteams.quick4j.web.model.*;
 import com.eliteams.quick4j.web.service.DeviceService;
 import com.eliteams.quick4j.web.service.EngineerService;
 import com.eliteams.quick4j.web.service.JobService;
@@ -13,11 +11,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -59,6 +58,7 @@ public class PageController {
      */
     @RequestMapping("/deviceManager")
     public ModelAndView deviceManager() {
+        User user = (User) SessionUtils.getSession().getAttribute("userInfo");
         List<Device> list = deviceService.getDevices();
         ModelAndView mav=new ModelAndView("deviceManager");
         mav.addObject("devices", list);
@@ -70,9 +70,13 @@ public class PageController {
     public ModelAndView mainInfo() {
         int deviceCount = deviceService.getDeviceCount();
         int invalidDeviceCount = deviceService.getDeviceCountByState(1);
+        int finishJobCount = jobService.getJobCountByType(0);
+        int todoJobCount = jobService.getJobCountByType(1);
         ModelAndView mav=new ModelAndView("mainInfo");
         mav.addObject("deviceCount", deviceCount);
         mav.addObject("invalidDeviceCount", invalidDeviceCount);
+        mav.addObject("finishJobCount", finishJobCount);
+        mav.addObject("todoJobCount", todoJobCount);
 
         return mav;
     }
@@ -82,6 +86,16 @@ public class PageController {
                           @RequestParam("deliverytime") String deliverytime, @RequestParam("endtime") String endtime) {
         Device device = new Device();
         device.setName(name);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            device.setDeliverydate(sdf.parse(deliverytime));
+            device.setEnddate(sdf.parse(endtime));
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         deviceService.insert(device);
         List<Device> list = deviceService.getDevices();
         ModelAndView mav=new ModelAndView("deviceManager");
@@ -189,4 +203,38 @@ public class PageController {
         return "500";
     }
 
+
+    @RequestMapping(value = "/registeruser", method = RequestMethod.POST)
+    public String registeruser(
+            @RequestParam("username") String username, @RequestParam("password") String password) {
+//        User user = userService.selectByUsername(username);
+//        if (user != null)
+//            return false;
+
+        return "";
+    }
+
+    @RequestMapping(value = "/deletedevice", method = RequestMethod.POST)
+    public void deletedevice(@RequestParam("deviceid") Long id) {
+        deviceService.delete(id);
+    }
+
+    @RequestMapping(value = "/updatedevice", method = RequestMethod.POST)
+    public void updatedevice(@RequestParam("deviceid") Long id, @RequestParam("name") String name, @RequestParam("company") String company,
+                             @RequestParam("deliverytime") String deliverytime, @RequestParam("endtime") String endtime,
+                             @RequestParam("status") int status) {
+        Device device = new Device();
+        device.setId(id);
+        device.setName(name);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            device.setDeliverydate(sdf.parse(deliverytime));
+            device.setEnddate(sdf.parse(endtime));
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        device.setState(status);
+        deviceService.update(device);
+    }
 }
