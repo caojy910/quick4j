@@ -161,6 +161,7 @@
                             <th> 现场工程师 </th>
                             <th> 专家工程师 </th>
                             <th> 设备状态 </th>
+                            <th> 远程协助 </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -182,6 +183,8 @@
                                         <td>${job.localengineerid}</td>
                                         <td>${job.remoteengineerid}</td>
                                         <td>${job.jobstate}</td>
+                                        <td><button>开始协助...</button>
+                                            <a href="rest/page/rtc2">开始协助</a></td>
                                     </tr>
                                 </c:forEach>
                         </tbody>

@@ -237,4 +237,24 @@ public class PageController {
         device.setState(status);
         deviceService.update(device);
     }
+
+    @RequestMapping("/rtc")
+    public ModelAndView rtc() {
+        ModelAndView mav=new ModelAndView("rtc");
+        mav.addObject("initiator", 1);
+        mav.addObject("roomLink", "");
+        mav.addObject("roomKey", 111);
+        mav.addObject("user", 1111);
+        return mav;
+    }
+
+    @RequestMapping("/rtc2")
+    public ModelAndView rtc2() {
+        ModelAndView mav=new ModelAndView("rtc2");
+        mav.addObject("initiator", 1);
+        mav.addObject("roomLink", "");
+        mav.addObject("roomKey", 111);
+        mav.addObject("user", 1111);
+        return mav;
+    }
 }

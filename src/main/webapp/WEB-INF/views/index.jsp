@@ -117,68 +117,73 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </a>
                         </li>
 
-                        <li class="">
-                            <a href="rest/page/deviceManager">
-                                <i class="fa fa-gears"></i><span class="title"> 客户设备台账 </span><span
-                                class="arrow "> </span>
-                            </a>
-                            <%--<ul class="sub-menu">--%>
-                                <%--<li>--%>
-                                    <%--<a href="javascript:;">--%>
-                                        <%--用户管理--%>
-                                    <%--</a>--%>
-                                <%--</li>--%>
-                                <%--<li>--%>
-                                    <%--<a href="javascript:;">--%>
-                                        <%--角色管理--%>
-                                    <%--</a>--%>
-                                <%--</li>--%>
-                                <%--<li>--%>
-                                    <%--<a href="javascript:;">--%>
-                                        <%--权限管理--%>
-                                    <%--</a>--%>
-                                <%--</li>--%>
-                            <%--</ul>--%>
-                        </li>
+                        <shiro:hasAnyRoles name="super_admin">
+                            <li class="">
+                                <a href="rest/page/deviceManager">
+                                    <i class="fa fa-gears"></i><span class="title"> 客户设备台账 </span><span
+                                    class="arrow "> </span>
+                                </a>
+                                <%--<ul class="sub-menu">--%>
+                                    <%--<li>--%>
+                                        <%--<a href="javascript:;">--%>
+                                            <%--用户管理--%>
+                                        <%--</a>--%>
+                                    <%--</li>--%>
+                                    <%--<li>--%>
+                                        <%--<a href="javascript:;">--%>
+                                            <%--角色管理--%>
+                                        <%--</a>--%>
+                                    <%--</li>--%>
+                                    <%--<li>--%>
+                                        <%--<a href="javascript:;">--%>
+                                            <%--权限管理--%>
+                                        <%--</a>--%>
+                                    <%--</li>--%>
+                                <%--</ul>--%>
+                            </li>
+                        </shiro:hasAnyRoles>
 
-                        <li class="">
-                            <a href="rest/page/engineerManager">
-                                <i class="fa fa-user"></i><span class="title"> 现场运维工程师管理 </span><span
-                                class="arrow "> </span>
-                            </a>
-                            <%--<ul class="sub-menu">--%>
-                                <%--<li>--%>
-                                    <%--<a href="javascript:;">--%>
-                                        <%--信息修改--%>
-                                    <%--</a>--%>
-                                <%--</li>--%>
-                                <%--<li>--%>
-                                    <%--<a href="javascript:;">--%>
-                                        <%--密码修改--%>
-                                    <%--</a>--%>
-                                <%--</li>--%>
-                                <%----%>
-                                <%--<!-- 测试权限控制 -->--%>
-                                <%--<shiro:hasAnyRoles name="super_admin">--%>
+                        <shiro:hasPermission name="user:create">
+
+                            <li class="">
+                                <a href="rest/page/engineerManager">
+                                    <i class="fa fa-user"></i><span class="title"> 现场运维工程师管理 </span><span
+                                    class="arrow "> </span>
+                                </a>
+                                <%--<ul class="sub-menu">--%>
                                     <%--<li>--%>
-                                        <%--<a href="javascript:;">super_admin 拥有此角色</a>--%>
+                                        <%--<a href="javascript:;">--%>
+                                            <%--信息修改--%>
+                                        <%--</a>--%>
                                     <%--</li>--%>
-                                <%--</shiro:hasAnyRoles>--%>
-                                <%----%>
-                                <%--<shiro:hasPermission name="user:create">--%>
                                     <%--<li>--%>
-                                        <%--<a href="javascript:;">user:create 拥有此权限</a>--%>
+                                        <%--<a href="javascript:;">--%>
+                                            <%--密码修改--%>
+                                        <%--</a>--%>
                                     <%--</li>--%>
-                                <%--</shiro:hasPermission>--%>
-                                <%----%>
-                                <%--<shiro:hasPermission name="user:update">--%>
-                                    <%--<li>--%>
-                                        <%--<a href="javascript:;">user:update 拥有此权限</a>--%>
-                                    <%--</li>--%>
-                                <%--</shiro:hasPermission>--%>
-     <%----%>
-                            <%--</ul>--%>
-                        </li>
+                                    <%----%>
+                                    <%--<!-- 测试权限控制 -->--%>
+                                    <%--<shiro:hasAnyRoles name="super_admin">--%>
+                                        <%--<li>--%>
+                                            <%--<a href="javascript:;">super_admin 拥有此角色</a>--%>
+                                        <%--</li>--%>
+                                    <%--</shiro:hasAnyRoles>--%>
+                                    <%----%>
+                                    <%--<shiro:hasPermission name="user:create">--%>
+                                        <%--<li>--%>
+                                            <%--<a href="javascript:;">user:create 拥有此权限</a>--%>
+                                        <%--</li>--%>
+                                    <%--</shiro:hasPermission>--%>
+                                    <%----%>
+                                    <%--<shiro:hasPermission name="user:update">--%>
+                                        <%--<li>--%>
+                                            <%--<a href="javascript:;">user:update 拥有此权限</a>--%>
+                                        <%--</li>--%>
+                                    <%--</shiro:hasPermission>--%>
+         <%----%>
+                                <%--</ul>--%>
+                            </li>
+                        </shiro:hasPermission>
 
                         <li class="">
                             <a href="rest/page/historyJobManager">
@@ -199,6 +204,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </ul>
                         </li>
 
+                        <li class="">
+                            <a href="rest/page/rtc" id="btn-remoteassist">
+                                <i class="fa fa-home"></i><span class="title"> 远程协助 </span><span
+                                    class="arrow "> </span>
+                            </a>
+                        </li>
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>
