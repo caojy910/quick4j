@@ -239,12 +239,13 @@ public class PageController {
     }
 
     @RequestMapping("/rtc")
-    public ModelAndView rtc() {
+    public ModelAndView rtc(@RequestParam("jobid") String jobid) {
         ModelAndView mav=new ModelAndView("rtc");
         mav.addObject("initiator", 1);
         mav.addObject("roomLink", "");
         mav.addObject("roomKey", 111);
         mav.addObject("user", 1111);
+        mav.addObject("jobid", jobid);
         return mav;
     }
 

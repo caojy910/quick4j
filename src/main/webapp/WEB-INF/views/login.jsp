@@ -122,7 +122,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
 	<!-- BEGIN REGISTRATION FORM -->
-	<form class="register-form" action="" method="post" onsubmit="return ajaxregister();">
+	<form class="register-form" action="rest/user/registeruser" method="post">
 		<h3>注  册</h3>
 		<p>
 			 请输入您的个人信息:
@@ -404,7 +404,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			<label class="control-label visible-ie8 visible-ie9">用户名</label>
 			<div class="input-icon">
 				<i class="fa fa-user"></i>
-				<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username"/>
+				<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username" onblur="check_username2(this)"/>
+				<span id="username_check"></span>
 			</div>
 		</div>
 		<div class="form-group">

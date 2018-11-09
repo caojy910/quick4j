@@ -42,10 +42,23 @@ $(function() {
             });
         };
 
+        me.handlePageContentClick = function() {
+            // $('.page-content li a').click(function(e) {
+            //     e.preventDefault();
+            //     var url = this.href;
+            //     if (url != null && url != 'javascript:;') {
+            //         $.get(url, function(data) {
+            //             $('#main-content').html(data);
+            //         });
+            //     }
+            // });
+        };
+
         me.init = function() {
             me.activeMenuClick();
             me.handleMenuClick();
             me.handleSubMenuClick();
+            // me.handlePageContentClick()
         };
 
         return me;

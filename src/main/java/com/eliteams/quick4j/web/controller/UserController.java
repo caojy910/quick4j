@@ -1,7 +1,9 @@
 package com.eliteams.quick4j.web.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,6 +13,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,10 @@ import com.eliteams.quick4j.web.model.User;
 import com.eliteams.quick4j.web.security.PermissionSign;
 import com.eliteams.quick4j.web.security.RoleSign;
 import com.eliteams.quick4j.web.service.UserService;
+import sun.security.provider.MD5;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * 用户控制器
@@ -106,17 +113,46 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registeruser", method = RequestMethod.POST)
-    public String registeruser(
-            @RequestParam("username") String username, @RequestParam("password") String password) {
+    public String registeruser(@Valid User user, HttpServletRequest request){
+//            @RequestParam("username") String username, @RequestParam("password") String password) {
 //        User user = userService.selectByUsername(username);
 //        if (user != null)
 //            return false;
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+//        User user = new User();
+//        user.setUsername(username);
+//        user.setPassword(password);
+
         userService.insert(user);
         return "login";
+    }
+
+    @RequestMapping(value = "/checkusername", method = RequestMethod.POST)
+    public void checkusername(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("username");
+        User user = userService.selectByUsername(username);
+        response.setContentType("text/xml;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        if (user == null)
+            out.println(1);
+        else
+            out.println(0);
+        out.close();
+
+    }
+
+    @RequestMapping(value = "/checkusername2", method = RequestMethod.POST)
+    @ResponseBody
+    public int checkusername2(@RequestParam("username") String username)
+            throws ServletException, IOException {
+        User user = userService.selectByUsername(username);
+
+        if (user == null)
+            return 1;
+        else
+            return 0;
     }
 
 }

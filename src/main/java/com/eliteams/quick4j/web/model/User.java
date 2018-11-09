@@ -19,6 +19,8 @@ public class User {
 
     private Date createTime;
 
+    private String fullname;
+
     public User() {
 
     }
@@ -66,6 +68,14 @@ public class User {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     @Override

@@ -32,7 +32,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <!-- BEGIN THEME STYLES -->
         <link href="assets/css/style-metronic.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/style-non-responsive.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
@@ -119,7 +119,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
                         <shiro:hasAnyRoles name="super_admin">
                             <li class="">
-                                <a href="rest/page/deviceManager">
+                                <a href="rest/page/deviceManager" id="btn-device">
                                     <i class="fa fa-gears"></i><span class="title"> 客户设备台账 </span><span
                                     class="arrow "> </span>
                                 </a>
@@ -143,10 +143,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </li>
                         </shiro:hasAnyRoles>
 
-                        <shiro:hasPermission name="user:create">
+                        <shiro:hasAnyRoles name="super_admin,admin">
 
                             <li class="">
-                                <a href="rest/page/engineerManager">
+                                <a href="rest/page/engineerManager" id="btn-engineer">
                                     <i class="fa fa-user"></i><span class="title"> 现场运维工程师管理 </span><span
                                     class="arrow "> </span>
                                 </a>
@@ -183,21 +183,21 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
          <%----%>
                                 <%--</ul>--%>
                             </li>
-                        </shiro:hasPermission>
+                        </shiro:hasAnyRoles>
 
                         <li class="">
-                            <a href="rest/page/historyJobManager">
+                            <a href="rest/page/historyJobManager" id="btn-job">
                                 <i class="fa fa-gears"></i><span class="title"> 工单管理 </span><span
                                     class="arrow "> </span>
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="rest/page/historyJobManager">
+                                    <a href="rest/page/historyJobManager" id="btn-job-done">
                                         历史工单
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="rest/page/todoJobManager">
+                                    <a href="rest/page/todoJobManager" id="btn-job-doing">
                                         待完成工单
                                     </a>
                                 </li>
@@ -307,16 +307,16 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
                                     <i class="fa fa-home"></i>
-                                    <a href="javascript:;">
+                                    <a href="#" onclick="clickanother('btn-dashboard')">
                                         首页
                                     </a>
                                     <i class="fa fa-angle-right"></i>
                                 </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        Dashboard
-                                    </a>
-                                </li>
+                                <%--<li>--%>
+                                    <%--<a href="javascript:;">--%>
+                                        <%--Dashboard--%>
+                                    <%--</a>--%>
+                                <%--</li>--%>
                             </ul>
                             <!-- END PAGE TITLE & BREADCRUMB-->
                         </div>

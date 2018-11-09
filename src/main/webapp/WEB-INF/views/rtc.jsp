@@ -1,134 +1,197 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%
-	String ctx = request.getContextPath() + "/";
-	pageContext.setAttribute("ctx", ctx);
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+
 <html>
-<head>
-<link rel="canonical" href="${roomLink}" />
-<meta http-equiv="X-UA-Compatible" content="chrome=1" />
-<script src="https://talkgadget.google.com/talkgadget/channel.js"></script>
-<!-- type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
--->
-<style type="text/css">
-a:link {
-	color: #ffffff;
-}
+	<head>
+		<base href="<%=basePath%>">
+		<link rel="canonical" href="${roomLink}" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<%--<script src="https://talkgadget.google.com/talkgadget/channel.js"></script>--%>
+		<!-- type="text/javascript">
+		  (function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		  })();
+		-->
+		<style type="text/css">
+		a:link {
+			color: #ffffff;
+		}
 
-a:visited {
-	color: #ffffff;
-}
+		a:visited {
+			color: #ffffff;
+		}
 
-html,body {
-	background-color: #000000;
-	height: 100%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-}
+		html,body {
+			/*background-color: #000000;*/
+			height: 100%;
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+		}
 
-body {
-	margin: 0;
-	padding: 0;
-}
+		body {
+			margin: 0;
+			padding: 0;
+		}
 
-#container {
-	background-color: #000000;
-	position: relative;
-	min-height: 100%;
-	width: 100%;
-	margin: 0px auto;
-}
+		#container {
+			background-color: #000000;
+			position: relative;
+			min-height: 100%;
+			width: 100%;
+			margin: 0px auto;
+		}
 
-#card {
-	-webkit-transition-property: rotation;
-	-webkit-transition-duration: 2s;
-	-webkit-transform-style: preserve-3d;
-}
+		#card {
+			-webkit-transition-property: rotation;
+			-webkit-transition-duration: 2s;
+			-webkit-transform-style: preserve-3d;
+		}
 
-#local {
-	position: absolute;
-	width: 100%;
-	-webkit-transform: scale(-1, 1);
-	-webkit-backface-visibility: hidden;
-}
+		#local {
+			position: absolute;
+			width: 100%;
+			-webkit-transform: scale(-1, 1);
+			-webkit-backface-visibility: hidden;
+		}
 
-#remote {
-	position: absolute;
-	width: 100%;
-	-webkit-transform: rotateY(180deg);
-	-webkit-backface-visibility: hidden;
-}
+		#remote {
+			position: absolute;
+			width: 100%;
+			-webkit-transform: rotateY(180deg);
+			-webkit-backface-visibility: hidden;
+		}
 
-#mini {
-	position: absolute;
-	height: 30%;
-	width: 30%;
-	bottom: 32px;
-	right: 4px;
-	-webkit-transform: scale(-1, 1);
-	opacity: 1.0;
-}
+		#mini {
+			position: absolute;
+			height: 30%;
+			width: 30%;
+			bottom: 32px;
+			right: 4px;
+			-webkit-transform: scale(-1, 1);
+			opacity: 1.0;
+		}
 
-#localVideo {
-	opacity: 0;
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 2s;
-}
+		/*#localVideo {*/
+			/*opacity: 0;*/
+			/*-webkit-transition-property: opacity;*/
+			/*-webkit-transition-duration: 2s;*/
+		/*}*/
 
-#remoteVideo {
-	opacity: 0;
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 2s;
-}
+		/*#remoteVideo {*/
+			/*opacity: 0;*/
+			/*-webkit-transition-property: opacity;*/
+			/*-webkit-transition-duration: 2s;*/
+		/*}*/
 
-#miniVideo {
-	opacity: 0;
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 2s;
-}
+		/*#miniVideo {*/
+			/*opacity: 0;*/
+			/*-webkit-transition-property: opacity;*/
+			/*-webkit-transition-duration: 2s;*/
+		/*}*/
 
-#footer {
-	spacing: 4px;
-	/*position: absolute;*/
-	bottom: 0;
-	width: 100%;
-	height: 28px;
-	background-color: #3F3F3F;
-	color: rgb(255, 255, 255);
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 28px;
-	text-align: center;
-}
+		#footer {
+			spacing: 4px;
+			/*position: absolute;*/
+			bottom: 0;
+			width: 100%;
+			height: 28px;
+			background-color: #3F3F3F;
+			color: rgb(255, 255, 255);
+			font-size: 13px;
+			font-weight: bold;
+			line-height: 28px;
+			text-align: center;
+		}
 
-#hangup {
-	font-size: 13px;
-	font-weight: bold;
-	color: #FFFFFF;
-	width: 128px;
-	height: 24px;
-	background-color: #808080;
-	border-style: solid;
-	border-color: #FFFFFF;
-	margin: 2px;
-}
+		#hangup {
+			font-size: 13px;
+			font-weight: bold;
+			color: #FFFFFF;
+			width: 128px;
+			height: 24px;
+			background-color: #808080;
+			border-style: solid;
+			border-color: #FFFFFF;
+			margin: 2px;
+		}
 
-#logo {
-	display: block;
-	top: 4;
-	right: 4;
-	position: absolute;
-	float: right;
-	opacity: 0.5;
-}
-</style>
-</head>
+		#logo {
+			display: block;
+			top: 4;
+			right: 4;
+			position: absolute;
+			float: right;
+			opacity: 0.5;
+		}
+		</style>
+	</head>
 <body>
+	<div>
+		<%--<div id="jobcard" >--%>
+			<%--<label>工单号</label><input id="jobid" type="text"><button onclick="join()">远程协助</button>--%>
+		<%--</div>--%>
+		<%--<div id="card">--%>
+		<%--<div id="local">--%>
+		<%--<video width="100%" height="100%" id="localVideo"--%>
+		<%--autoplay="autoplay" />--%>
+		<%--</div>--%>
+		<%--<div id="remote">--%>
+		<%--<video width="100%" height="100%" id="remoteVideo"--%>
+		<%--autoplay="autoplay"> </video>--%>
+		<%--<div id="mini">--%>
+		<%--<video width="100%" height="100%" id="miniVideo"--%>
+		<%--autoplay="autoplay" />--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+
+		<h2>远程协助</h2>
+		<div id="videos">
+			<video id="localVideo" autoplay muted playsinline></video>
+			<video id="remoteVideo" autoplay playsinline></video>
+		</div>
+
+
+
+		<div id="videoCanvas">
+			<div id="controls">
+				标记：
+				<select id="strokeStyleSelect">
+					<option value="red">红色</option>
+					<option value="green">绿色</option>
+					<option value="blue">蓝色</option>
+					<option value="orange">橙色</option>
+				</select>
+
+				<input type="button" name="eraseAllButton" id="eraseAllButton" value="清除标记" />
+			</div>
+
+			<canvas id="photo"></canvas>
+
+		</div>
+
+
+		<div id="buttons">
+			<button id="snap">截屏</button><span>      </span><button id="send">发送</button>
+			<%--<span> or </span>--%>
+			<%--<button id="snapAndSend">Snap &amp; Send</button>--%>
+		</div>
+
+		<div id="incoming">
+			<h2>接收图片</h2>
+			<div id="trail"></div>
+		</div>
+
+		<%--<div id="footer"></div>--%>
+		<%--<a href="http://www.webrtc.org"> <img id="logo" alt="WebRTC"--%>
+		<%--src="${ctx}images/webrtc_black_20p.png"> </a>--%>
+	</div>
+
 	<script type="text/javascript">
 		var localVideo;
 		var miniVideo;
@@ -152,15 +215,53 @@ body {
 		var isVideoMuted = false;
 		var isAudioMuted = false;
 
+        var dataChannel;
+
         var xhrequest;
 
-		function initialize() {
+        var photo = document.getElementById('photo');
+        var photoContext = photo.getContext('2d');
+        var trail = document.getElementById('trail');
+        var snapBtn = document.getElementById('snap');
+        var sendBtn = document.getElementById('send');
+        // var snapAndSendBtn = document.getElementById('snapAndSend');
+
+        var photoContextW;
+        var photoContextH;
+
+        var renderPhotoContextW;
+        var renderPhotoContextH;
+
+        // Attach event handlers
+        snapBtn.addEventListener('click', snapPhoto);
+        sendBtn.addEventListener('click', sendPhoto);
+        // snapAndSendBtn.addEventListener('click', snapAndSend);
+
+        function initialize() {
 			console.log("Initializing; room=${roomKey}.");
 			card = document.getElementById("card");
 			localVideo = document.getElementById("localVideo");
 			miniVideo = document.getElementById("miniVideo");
 			remoteVideo = document.getElementById("remoteVideo");
-		}
+
+
+            localVideo.onloadedmetadata = function() {
+                renderPhotoContextW = localVideo.videoWidth;
+                renderPhotoContextH = localVideo.videoHeight;
+                console.log('gotStream with width and height:', renderPhotoContextW, renderPhotoContextH);
+            };
+
+
+            remoteVideo.onloadedmetadata = function() {
+                photo.width = photoContextW = remoteVideo.videoWidth;
+                photo.height = photoContextH = remoteVideo.videoHeight;
+                // remotePhotoContextW = remoteVideo.videoWidth;
+                // remotePhotoContextH = remoteVideo.videoHeight;
+                console.log('gotStream with width and height:', photoContextW, photoContextH);
+            };
+
+            join();
+        }
 		
 		function getUserMedia() {
 			try {
@@ -186,7 +287,7 @@ body {
 		function onUserMediaSuccess(stream) {
 			console.log("User has granted access to local media.");
 			var url = URL.createObjectURL(stream);
-			localVideo.style.opacity = 1;
+			// localVideo.style.opacity = 1;
 			localVideo.src = url;
 			localStream = stream;
 			// Caller creates PeerConnection.
@@ -246,7 +347,7 @@ body {
 		}
 
 		function join() {
-			path = 'room?r=' + $("#jobid").val();
+			path = 'room?r=' + ${jobid};
             xhrequest = new XMLHttpRequest();
             xhrequest.open('POST', path, true);
             xhrequest.onreadystatechange = joincallback;
@@ -283,9 +384,9 @@ body {
 
 		function openChannel() {
 			console.log("Opening channel.");
-            var jobid = $("#jobid").val();
+            var jobid = ${jobid};
 			socket = new WebSocket(
-					"ws://"+window.location.host+"${ctx}websocket/" + jobid + "/" + user);
+					"ws://"+window.location.host+"${ctx}/websocket/" + jobid + "/" + user);
 			socket.onopen = onChannelOpened;
 			socket.onmessage = onChannelMessage;
 			socket.onclose = onChannelClosed;
@@ -335,10 +436,294 @@ body {
 			pc.onopen = onSessionOpened;
 			pc.onaddstream = onRemoteStreamAdded;
 			pc.onremovestream = onRemoteStreamRemoved;
+
+            if (initiator == 1) {
+                console.log('Creating Data Channel');
+                dataChannel = pc.createDataChannel("photos");
+                onDataChannelCreated(dataChannel);
+            }
+			else {
+                pc.ondatachannel = function(event) {
+                    console.log('ondatachannel:', event.channel);
+                    dataChannel = event.channel;
+                    onDataChannelCreated(dataChannel);
+                };
+			}
+
 		}
 
-		function setStatus(state) {
-			footer.innerHTML = state;
+        function onDataChannelCreated(channel) {
+            console.log('onDataChannelCreated:', channel);
+
+            channel.onopen = function() {
+                console.log('CHANNEL opened!!!');
+                sendBtn.disabled = false;
+                // snapAndSendBtn.disabled = false;
+            };
+
+            channel.onclose = function () {
+                console.log('Channel closed.');
+                sendBtn.disabled = true;
+                // snapAndSendBtn.disabled = true;
+            }
+
+            channel.onmessage =  receiveDataChromeFactory();
+        }
+
+
+        function receiveDataChromeFactory() {
+            var buf, count;
+			console.log("receiveDataChromeFactory");
+            return function onmessage(event) {
+                if (typeof event.data === 'string') {
+                    buf = window.buf = new Uint8ClampedArray(parseInt(event.data));
+                    count = 0;
+                    console.log('Expecting a total of ' + buf.byteLength + ' bytes');
+                    return;
+                }
+
+                var data = new Uint8ClampedArray(event.data);
+                buf.set(data, count);
+
+                count += data.byteLength;
+                console.log('count: ' + count);
+
+                if (count === buf.byteLength) {
+// we're done: all data chunks have been received
+                    console.log('Done. Rendering photo.');
+                    renderPhoto(buf);
+                }
+            };
+        }
+
+        function receiveDataFirefoxFactory() {
+            var count, total, parts;
+
+            return function onmessage(event) {
+                if (typeof event.data === 'string') {
+                    total = parseInt(event.data);
+                    parts = [];
+                    count = 0;
+                    console.log('Expecting a total of ' + total + ' bytes');
+                    return;
+                }
+
+                parts.push(event.data);
+                count += event.data.size;
+                console.log('Got ' + event.data.size + ' byte(s), ' + (total - count) +
+                    ' to go.');
+
+                if (count === total) {
+                    console.log('Assembling payload');
+                    var buf = new Uint8ClampedArray(total);
+                    var compose = function(i, pos) {
+                        var reader = new FileReader();
+                        reader.onload = function() {
+                            buf.set(new Uint8ClampedArray(this.result), pos);
+                            if (i + 1 === parts.length) {
+                                console.log('Done. Rendering photo.');
+                                renderPhoto(buf);
+                            } else {
+                                compose(i + 1, pos + this.result.byteLength);
+                            }
+                        };
+                        reader.readAsArrayBuffer(parts[i]);
+                    };
+                    compose(0, 0);
+                }
+            };
+        }
+
+
+        /****************************************************************************
+         * Aux functions, mostly UI-related
+         ****************************************************************************/
+
+        function snapPhoto() {
+            photoContext.drawImage(remoteVideo, 0, 0, photo.width, photo.height);
+            saveDrawingSurface();
+            show(photo, sendBtn);
+        }
+
+        function sendPhoto() {
+            // Split data channel message in chunks of this byte length.
+            var CHUNK_LEN = 64000;
+            console.log('width and height ', photoContextW, photoContextH);
+            var img = photoContext.getImageData(0, 0, photoContextW, photoContextH),
+                len = img.data.byteLength,
+                n = len / CHUNK_LEN | 0;
+
+            console.log('Sending a total of ' + len + ' byte(s)');
+
+            if (!dataChannel) {
+                logError('Connection has not been initiated. ' +
+                    'Get two peers in the same room first');
+                return;
+            } else if (dataChannel.readyState === 'closed') {
+                logError('Connection was lost. Peer closed the connection.');
+                return;
+            }
+
+            dataChannel.send(len);
+
+            // split the photo and send in chunks of about 64KB
+            for (var i = 0; i < n; i++) {
+                var start = i * CHUNK_LEN,
+                    end = (i + 1) * CHUNK_LEN;
+                console.log(start + ' - ' + (end - 1));
+                dataChannel.send(img.data.subarray(start, end));
+            }
+
+            // send the reminder, if any
+            if (len % CHUNK_LEN) {
+                console.log('last ' + len % CHUNK_LEN + ' byte(s)');
+                dataChannel.send(img.data.subarray(n * CHUNK_LEN));
+            }
+
+        }
+
+        function snapAndSend() {
+            snapPhoto();
+            sendPhoto();
+        }
+
+        function renderPhoto(data) {
+            var canvas = document.createElement('canvas');
+            canvas.width = renderPhotoContextW;
+            canvas.height = renderPhotoContextH;
+            canvas.classList.add('incomingPhoto');
+            // trail is the element holding the incoming images
+            trail.insertBefore(canvas, trail.firstChild);
+
+            var context = canvas.getContext('2d');
+            var img = context.createImageData(renderPhotoContextW, renderPhotoContextH);
+            img.data.set(data);
+            context.putImageData(img, 0, 0);
+        }
+
+
+        function show() {
+            Array.prototype.forEach.call(arguments, function(elem) {
+                elem.style.display = null;
+            });
+        }
+
+        function hide() {
+            Array.prototype.forEach.call(arguments, function(elem) {
+                elem.style.display = 'none';
+            });
+        }
+
+
+        function logError(err) {
+            if (!err) return;
+            if (typeof err === 'string') {
+                console.warn(err);
+            } else {
+                console.warn(err.toString(), err);
+            }
+        }
+
+        // draw
+        var eraseAllButton = document.getElementById("eraseAllButton");
+        var strokeStyleSelect = document.getElementById("strokeStyleSelect");
+
+        var drawingSurfacsImageData = null;
+        var mousedown = {};
+        var dragging = false;
+        var loc=null;
+
+
+        photo.onmousedown = function(e) {
+            loc = windowToCanvas(e.clientX, e.clientY);
+
+            e.preventDefault();
+            // saveDrawingSurface();
+            mousedown.x = loc.x;
+            mousedown.y = loc.y;
+            dragging = true;
+            photoContext.strokeStyle = strokeStyleSelect.value;
+            photoContext.beginPath();
+            photoContext.moveTo(loc.x, loc.y);
+        };
+        photo.onmousemove = function(e){
+
+            //判断当前是否用户在拖动
+            if(dragging) {
+                e.preventDefault();
+                loc = windowToCanvas(e.clientX, e.clientY);
+                photoContext.lineTo(loc.x, loc.y);
+                photoContext.stroke();
+                // restoreDrawingSurface();
+                // updateRubberband(loc);
+
+            }
+        };
+        photo.onmouseup = function(e) {
+            loc = windowToCanvas(e.clientX, e.clientY);
+            // restoreDrawingSurface();
+            // updateRubberband(loc);
+            //鼠标抬起，拖动标记设为否
+            dragging = false;
+        };
+
+        //获取实际的鼠标在canvas的位置
+        function windowToCanvas(x, y) {
+            var bbox = photo.getBoundingClientRect();
+            return {
+                x : x - bbox.left * (photo.width / bbox.width),
+                y : y - bbox.top * (photo.height / bbox.height)
+            };
+        }
+
+
+        //保存当前的canvas上的数据
+        function saveDrawingSurface() {
+            drawingSurfacsImageData = photoContext.getImageData(0, 0, photo.width, photo.height);
+        }
+        //恢复canvas的数据，主要用来显示最新的线段，擦除原来的线段
+        function restoreDrawingSurface() {
+            photoContext.putImageData(drawingSurfacsImageData,
+                0, 0, 0, 0, photo.width, photo.height
+            );
+        }
+
+        //更新
+        function  updateRubberband(loc) {
+            //此处在《HTML5 canvas核心技术——图形、动画与游戏开发》一书中
+            //updateRubberbandRectangle方法是没有注释的，但是我不懂要这个
+            //方法有什么作用，注释之后也不影响，话说我也不用话什么矩形哇
+            //有知道这个方法在这里是做什么的同学在下方评论一下告知哈
+            //updateRubberbandRectangle(loc);
+            drawRubberbandShape(loc);
+        }
+        //画最新的线条
+        function drawRubberbandShape(loc) {
+            photoContext.beginPath();
+            photoContext.moveTo(mousedown.x, mousedown.y);
+            photoContext.lineTo(loc.x, loc.y);
+            photoContext.stroke();
+        }
+
+        eraseAllButton.onclick = function(e){
+            photoContext.clearRect(0, 0, photoContext.width, photoContext.height);
+            restoreDrawingSurface();
+            // photoContext.restore();
+            // saveDrawingSurface();
+        };
+
+        strokeStyleSelect.onchange = function(e){
+            photoContext.strokeStyle = strokeStyleSelect.value;
+        };
+
+
+        photoContext.strokeStyle = strokeStyleSelect.value;
+
+
+
+
+        function setStatus(state) {
+			// footer.innerHTML = state;
 		}
 
 		function doAnswer() {
@@ -482,7 +867,7 @@ body {
 			console.log("Remote stream added.");
 			console.log(event);
 			var url = URL.createObjectURL(event.stream);
-			miniVideo.src = localVideo.src;
+			// miniVideo.src = localVideo.src;
 			remoteVideo.src = url;
 			remoteStream = event.stream;
 			waitForRemoteVideo();
@@ -526,31 +911,31 @@ body {
 			}
 		}
 		function transitionToActive() {
-			remoteVideo.style.opacity = 1;
-			card.style.webkitTransform = "rotateY(180deg)";
+			// remoteVideo.style.opacity = 1;
+			// card.style.webkitTransform = "rotateY(180deg)";
 			setTimeout(function() {
-				localVideo.src = "";
+				// localVideo.src = "";
 			}, 500);
 			setTimeout(function() {
-				miniVideo.style.opacity = 1;
+				// miniVideo.style.opacity = 1;
 			}, 1000);
 			setStatus("<input type=\"button\" id=\"hangup\" value=\"Hang up\" onclick=\"onHangup()\" />");
 		}
 		function transitionToWaiting() {
 			card.style.webkitTransform = "rotateY(0deg)";
 			setTimeout(function() {
-				localVideo.src = miniVideo.src;
-				miniVideo.src = "";
+				// localVideo.src = miniVideo.src;
+				// miniVideo.src = "";
 				remoteVideo.src = ""
 			}, 500);
-			miniVideo.style.opacity = 0;
-			remoteVideo.style.opacity = 0;
+			// miniVideo.style.opacity = 0;
+			// remoteVideo.style.opacity = 0;
 			resetStatus();
 		}
 		function transitionToDone() {
-			localVideo.style.opacity = 0;
-			remoteVideo.style.opacity = 0;
-			miniVideo.style.opacity = 0;
+			// localVideo.style.opacity = 0;
+			// remoteVideo.style.opacity = 0;
+			// miniVideo.style.opacity = 0;
 			setStatus("You have left the call. <a href=\"{{ room_link }}\">Click here</a> to rejoin.");
 		}
 		function enterFullScreen() {
@@ -640,27 +1025,11 @@ body {
             getUserMedia();
         }
 	</script>
-	<div id="container" ondblclick="enterFullScreen()">
-		<div id="jobcard" >
-			<label>工单号</label><input id="jobid" type="text"><button onclick="join()">远程协助</button>
-		</div>
-		<div id="card">
-			<div id="local">
-				<video width="100%" height="100%" id="localVideo"
-					autoplay="autoplay" />
-			</div>
-			<div id="remote">
-				<video width="100%" height="100%" id="remoteVideo"
-					autoplay="autoplay"> </video>
-				<div id="mini">
-					<video width="100%" height="100%" id="miniVideo"
-						autoplay="autoplay" />
-				</div>
-			</div>
-		</div>
-		<div id="footer"></div>
-		<a href="http://www.webrtc.org"> <img id="logo" alt="WebRTC"
-			src="${ctx}images/webrtc_black_20p.png"> </a>
-	</div>
+	<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+	<script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+	<script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 </body>
 </html>

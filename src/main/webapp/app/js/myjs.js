@@ -237,3 +237,93 @@ function ajaxsubmitupdatedevice(id, name, starttime, endtime, status) {
     return true;
 }
 
+var xhrequest;
+
+function check_username(obj) {
+    var username = $(obj).val();
+    $("#username_check").text("检测中...");
+    var path = '/rest/user/checkusername?username=' + username;
+    xhrequest = new XMLHttpRequest();
+    xhrequest.open('POST', path, true);
+    xhrequest.onreadystatechange = checkusernamecallback;
+    xhrequest.send();
+}
+
+function checkusernamecallback() {
+    if (xhrequest.readyState===4 && xhrequest.status===200) {
+        console.log(xhrequest.responseText);
+        var result = xhrequest.responseText;
+        if (result == 1)
+            $("#username_check").text("用户名可以使用");
+        else
+            $("#username_check").text("用户名已被占用");
+    }
+}
+
+
+function check_username2(obj) {
+    if ($(obj).val().length == 0)
+        return true;
+    var label = $("#username_check");
+    label.text("检测中...");
+    label[0].setAttribute("uservalid", "false");
+    $.ajax({
+            //提交数据的类型 POST GET
+            type:"POST",
+            //提交的网址
+            url:"rest/user/checkusername2",
+            //提交的数据
+            data: {
+                username: $(obj).val()
+            },
+            //返回数据的格式
+            datatype: "html",
+            //在请求之前调用的函数
+            beforeSend:function(){},
+            //成功返回之后调用的函数
+            success:function(data){
+                if (data == 1) {
+                    $("#username_check").text("用户名可以使用");
+                    $("#username_check")[0].setAttribute("uservalid", "true");
+                }
+                else {
+                    $("#username_check").text("用户名已被占用");
+                    $("#username_check")[0].setAttribute("uservalid", "false");
+                }
+            }   ,
+            //调用执行后调用的函数
+            complete: function(XMLHttpRequest, textStatus){
+                // $('#main-content').html(data);
+            },
+            //调用出错执行的函数
+            error: function(){
+                //请求出错处理
+            }
+        }
+    )
+
+    return true;
+}
+
+function encryptPassword() {
+    var password = $("[name='password']").val();
+    var rpassword = $("[name='rpassword']").val();
+    if (password.length > 0 && password == rpassword) {
+        $("[name='password']").val(sha256_digest(password))
+        $("[name='rpassword']").val(sha256_digest(rpassword))
+    }
+}
+
+function checkusernamevalid() {
+    var valid = $("#username_check")[0].getAttribute("uservalid");
+    if (valid == "false") {
+        return false;
+    }
+
+    return true;
+}
+
+function clickanother(ref) {
+    var another = document.getElementById(ref);
+    another.click();
+}

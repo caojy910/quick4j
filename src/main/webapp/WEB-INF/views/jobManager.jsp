@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page import="com.eliteams.quick4j.web.dao.DeviceMapper" %>
 <%@ page import="com.eliteams.quick4j.web.model.DeviceExample" %>
 <%@ page language="java" pageEncoding="utf-8"%>
@@ -15,6 +16,7 @@
                 <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
+                            <shiro:hasAnyRoles name="super_admin,admin">
                             <div class="col-md-6">
                                 <div class="btn-group">
                                     <a id="sample_editable_1_new" class="btn sbold green" href="#addjob" data-toggle="modal"> 新建工单
@@ -22,6 +24,7 @@
                                     </a>
                                 </div>
                             </div>
+                            </shiro:hasAnyRoles>
                             <div class="col-md-6">
                                 <div class="btn-group pull-right">
                                     <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -165,28 +168,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                                <c:forEach items="${jobList}" var="job">
-                                    <tr class="odd gradeX">
-                                        <td>
-                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                <input type="checkbox" class="checkboxes" value="1" />
-                                                <span></span>
-                                            </label>
-                                        </td>
-                                        <td>${job.id}</td>
-                                        <td>${job.createTime}</td>
-                                        <td>${job.type}</td>
-                                        <td>${job.deciveid}</td>
-                                        <td>${job.deciveid}</td>
-                                        <td>${job.deciveid}</td>
-                                        <td>${job.description}</td>
-                                        <td>${job.localengineerid}</td>
-                                        <td>${job.remoteengineerid}</td>
-                                        <td>${job.jobstate}</td>
-                                        <td><button>开始协助...</button>
-                                            <a href="rest/page/rtc2">开始协助</a></td>
-                                    </tr>
-                                </c:forEach>
+                        <c:forEach items="${jobList}" var="job">
+                            <tr class="odd gradeX">
+                                <td>
+                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                        <input type="checkbox" class="checkboxes" value="1" />
+                                        <span></span>
+                                    </label>
+                                </td>
+                                <td>${job.id}</td>
+                                <td>${job.createTime}</td>
+                                <td>${job.type}</td>
+                                <td>${job.deciveid}</td>
+                                <td>${job.deciveid}</td>
+                                <td>${job.deciveid}</td>
+                                <td>${job.description}</td>
+                                <td>${job.localengineerid}</td>
+                                <td>${job.remoteengineerid}</td>
+                                <td>${job.jobstate}</td>
+                                <td><a href="rest/page/rtc?jobid=${job.id}" target="_blank">开始协助</a></td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

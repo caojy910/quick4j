@@ -250,6 +250,17 @@ var Login = function() {
             },
 
             submitHandler : function(form) {
+                var valid = $("#username_check")[0].getAttribute("uservalid");
+                if (valid == "false") {
+                    return;
+                }
+
+                var password = $("[name='password']").val();
+                var rpassword = $("[name='rpassword']").val();
+                if (password.length > 0 && password == rpassword) {
+                    $("[name='password']").val(sha256_digest(password))
+                    $("[name='rpassword']").val(sha256_digest(rpassword))
+                }
                 form.submit();
             }
         });
