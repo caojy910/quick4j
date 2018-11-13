@@ -21,6 +21,8 @@ public class User {
 
     private String fullname;
 
+    private Long companyid;
+
     public User() {
 
     }
@@ -78,9 +80,18 @@ public class User {
         this.fullname = fullname;
     }
 
+    public Long getCompanyid() {
+        return companyid;
+    }
+
+    public void setCompanyid(Long companyid) {
+        this.companyid = companyid;
+    }
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", state=" + state + ", createTime=" + createTime + "]";
+        return "User [id=" + id + ", username=" + username + ", password=" + password + ", state=" + state +
+                ", createTime=" + createTime + ", fullname=" + fullname + ", companyid=" + companyid + "]";
     }
 
 }

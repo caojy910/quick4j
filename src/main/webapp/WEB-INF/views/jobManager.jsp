@@ -16,15 +16,15 @@
                 <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
-                            <shiro:hasAnyRoles name="super_admin,admin">
                             <div class="col-md-6">
+                                <shiro:hasAnyRoles name="super_admin,admin">
                                 <div class="btn-group">
                                     <a id="sample_editable_1_new" class="btn sbold green" href="#addjob" data-toggle="modal"> 新建工单
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
+                                </shiro:hasAnyRoles>
                             </div>
-                            </shiro:hasAnyRoles>
                             <div class="col-md-6">
                                 <div class="btn-group pull-right">
                                     <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Tools

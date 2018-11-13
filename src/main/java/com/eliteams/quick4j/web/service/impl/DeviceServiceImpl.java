@@ -2,9 +2,11 @@ package com.eliteams.quick4j.web.service.impl;
 
 import com.eliteams.quick4j.core.generic.GenericDao;
 import com.eliteams.quick4j.core.generic.GenericServiceImpl;
+import com.eliteams.quick4j.core.util.SessionUtils;
 import com.eliteams.quick4j.web.dao.DeviceMapper;
 import com.eliteams.quick4j.web.model.Device;
 import com.eliteams.quick4j.web.model.DeviceExample;
+import com.eliteams.quick4j.web.model.User;
 import com.eliteams.quick4j.web.service.DeviceService;
 import org.springframework.stereotype.Service;
 
@@ -62,7 +64,11 @@ public class DeviceServiceImpl extends GenericServiceImpl<Device, Long> implemen
 
     @Override
     public List<Device> getDevices() {
+        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
+        if (user == null || user.getCompanyid() == null)
+            return null;
         DeviceExample example = new DeviceExample();
+        example.createCriteria().andCompanyidEqualTo(user.getCompanyid());
         return deviceMapper.selectByExample(example);
     }
 
