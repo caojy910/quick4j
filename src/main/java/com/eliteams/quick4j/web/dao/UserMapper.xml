@@ -7,6 +7,8 @@
         <result column="password" property="password" jdbcType="CHAR" />
         <result column="state" property="state" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+        <result column="companyid" property="companyid" jdbcType="BIGINT" />
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -67,7 +69,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, username, password, state, create_time
+        id, username, password, state, create_time, companyid, fullname
     </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eliteams.quick4j.web.model.UserExample">
         select
@@ -101,9 +103,9 @@
     </delete>
     <insert id="insert" parameterType="com.eliteams.quick4j.web.model.User">
         insert into user (id, username, password,
-        state, create_time)
+        state, create_time, companyid, fullname)
         values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR},
-        #{state,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+        #{state,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{companyid, jdbcType=BIGINT}, #{fullname, jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.eliteams.quick4j.web.model.User">
         insert into user
@@ -123,6 +125,12 @@
             <if test="createTime != null">
                 create_time,
             </if>
+            <if test="companyid != null">
+                companyid,
+            </if>
+            <if test="fullname != null">
+                fullname,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -139,6 +147,12 @@
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="companyid != null">
+                #{companyid,jdbcType=BIGINT},
+            </if>
+            <if test="fullname != null">
+                #{fullname,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -166,6 +180,12 @@
             <if test="record.createTime != null">
                 create_time = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="record.companyid != null">
+                companyid = #{record.companyid,jdbcType=BIGINT},
+            </if>
+            <if test="record.fullname != null">
+                fullname = #{record.fullname,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +197,9 @@
         username = #{record.username,jdbcType=VARCHAR},
         password = #{record.password,jdbcType=CHAR},
         state = #{record.state,jdbcType=VARCHAR},
-        create_time = #{record.createTime,jdbcType=TIMESTAMP}
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        companyid = #{record.companyid,jdbcType=BIGINT},
+        fullname = #{record.fullname,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -197,6 +219,12 @@
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="record.companyid != null">
+                companyid = #{record.companyid,jdbcType=BIGINT},
+            </if>
+            <if test="record.fullname != null">
+                fullname = #{record.fullname,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -205,8 +233,9 @@
         set username = #{username,jdbcType=VARCHAR},
         password = #{password,jdbcType=CHAR},
         state = #{state,jdbcType=VARCHAR},
-        create_time =
-        #{createTime,jdbcType=TIMESTAMP}
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        comanyid = #{companyid,jdbcType=BIGINT},
+        fullname = #{fullname,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
 
