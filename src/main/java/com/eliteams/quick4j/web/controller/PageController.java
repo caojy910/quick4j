@@ -1,24 +1,28 @@
 package com.eliteams.quick4j.web.controller;
 
+import com.alibaba.druid.util.Base64;
 import com.eliteams.quick4j.core.util.SessionUtils;
 import com.eliteams.quick4j.web.model.*;
-import com.eliteams.quick4j.web.service.DeviceService;
-import com.eliteams.quick4j.web.service.EngineerService;
-import com.eliteams.quick4j.web.service.JobService;
+import com.eliteams.quick4j.web.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 视图控制器,返回jsp视图给前端
@@ -36,6 +40,12 @@ public class PageController {
     private EngineerService engineerService;
     @Resource
     private JobService jobService;
+    @Resource
+    private UserService userService;
+    @Resource
+    private CompanyService companyService;
+    @Resource
+    private OprecordService oprecordService;
 
     /**
      * 登录页
@@ -60,6 +70,8 @@ public class PageController {
     public ModelAndView deviceManager() {
         User user = (User) SessionUtils.getSession().getAttribute("userInfo");
         List<Device> list = deviceService.getDevices();
+        setDeviceCompanyName(list);
+
         ModelAndView mav=new ModelAndView("deviceManager");
         mav.addObject("devices", list);
         return mav;
@@ -98,6 +110,8 @@ public class PageController {
 
         deviceService.insert(device);
         List<Device> list = deviceService.getDevices();
+        setDeviceCompanyName(list);
+
         ModelAndView mav=new ModelAndView("deviceManager");
         mav.addObject("devices", list);
         return mav;
@@ -106,7 +120,9 @@ public class PageController {
     @RequestMapping("/engineerManager")
     public ModelAndView engineerManager() {
         List<Engineer> locallist = engineerService.getLocalEngineers();
+        setEnineerNameById(locallist);
         List<Engineer> remotelist = engineerService.getRemoteEngineers();
+        setEnineerNameById(remotelist);
         ModelAndView mav=new ModelAndView("engineerManager");
         mav.addObject("localengineers", locallist);
         mav.addObject("remoteengineers", remotelist);
@@ -114,29 +130,40 @@ public class PageController {
     }
 
     @RequestMapping(value = "/addlocalengineer", method = RequestMethod.POST)
-    public ModelAndView adddlocalengineer(@RequestParam("name") String name, @RequestParam("headimg") String headimg, @RequestParam("number") String number, @RequestParam("company") String company,
-                                  @RequestParam("partment") String partment, @RequestParam("level") String level) {
+    public ModelAndView adddlocalengineer(@RequestParam("name") String name, @RequestParam("headimg") MultipartFile headimg, @RequestParam("number") String number, @RequestParam("company") String company,
+                                          @RequestParam("partment") String partment, @RequestParam("level") String level) {
         return addengineer(name, headimg, number, company, partment, level, 0);
 
     }
 
     @RequestMapping(value = "/addremoteengineer", method = RequestMethod.POST)
-    public ModelAndView adddremoteengineer(@RequestParam("name") String name, @RequestParam("headimg") String headimg, @RequestParam("number") String number, @RequestParam("company") String company,
+    public ModelAndView adddremoteengineer(@RequestParam("name") String name, @RequestParam("headimg") MultipartFile headimg, @RequestParam("number") String number, @RequestParam("company") String company,
                                           @RequestParam("partment") String partment, @RequestParam("level") String level) {
         return addengineer(name, headimg, number, company, partment, level, 1);
     }
 
-    private ModelAndView addengineer(String name, String headimg, String number, String company,
+    private ModelAndView addengineer(String name, MultipartFile headimg, String number, String company,
                                      String partment, String level, int type) {
         Engineer engineer = new Engineer();
         engineer.setName(name);
-        engineer.setHeadimg(headimg);
+        String base64Img = "";
+        if (headimg != null) {
+            try {
+                byte[] imgbuffer = headimg.getBytes();
+                base64Img = Base64.byteArrayToBase64(imgbuffer);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        engineer.setHeadimg(base64Img);
         engineer.setPartment(partment);
         engineer.setLevel(1);
         engineer.setType(type);
         engineerService.insert(engineer);
         List<Engineer> locallist = engineerService.getLocalEngineers();
+        setEnineerNameById(locallist);
         List<Engineer> remotelist = engineerService.getRemoteEngineers();
+        setEnineerNameById(remotelist);
         ModelAndView mav=new ModelAndView("engineerManager");
         mav.addObject("localengineers", locallist);
         mav.addObject("remoteengineers", remotelist);
@@ -146,6 +173,7 @@ public class PageController {
     @RequestMapping("/historyJobManager")
     public ModelAndView historyJobManager() {
         List<Job> joblist = jobService.getHistoryJobs();
+        setJobEngineerName(joblist);
         ModelAndView mav=new ModelAndView("jobManager");
         mav.addObject("jobList", joblist);
         return mav;
@@ -154,9 +182,53 @@ public class PageController {
     @RequestMapping("/todoJobManager")
     public ModelAndView todoJobManager() {
         List<Job> joblist = jobService.getTodoJobs();
+        setJobEngineerName(joblist);
         ModelAndView mav=new ModelAndView("jobManager");
         mav.addObject("jobList", joblist);
         return mav;
+    }
+
+    private void setJobEngineerName(List<Job> joblist) {
+        if (joblist != null) {
+            for (Job job : joblist) {
+                if (job != null) {
+                    if (job.getLocalengineerid() != null)
+                        job.setLocalengineerName(getUserFullNameById(job.getLocalengineerid()));
+                    if (job.getRemoteengineerid() != null)
+                        job.setRemoteengineerName(getUserFullNameById(job.getRemoteengineerid()));
+                }
+            }
+        }
+    }
+
+    private void setDeviceCompanyName(List<Device> list) {
+        if (list != null) {
+            for (Device deviceItem : list) {
+                if (deviceItem != null) {
+                    deviceItem.setCompanyName(companyService.getComanyNameById(deviceItem.getCompanyid()));
+                }
+            }
+        }
+    }
+
+    private void setEnineerNameById(List<Engineer> engineerList) {
+        if (engineerList != null) {
+            for (Engineer engineer : engineerList) {
+                if (engineer != null) {
+                    if (engineer.getId() != null)
+                        engineer.setName(getUserFullNameById(engineer.getId()));
+                }
+            }
+        }
+    }
+
+    private String getUserFullNameById(Long id) {
+        String name = userService.selectFullNameById(id);
+        if (name == null)
+            name = userService.selectUserNameById(id);
+        if (name == null)
+            name = id + "";
+        return name;
     }
 
     @RequestMapping(value = "/addjob", method = RequestMethod.POST)
@@ -257,5 +329,14 @@ public class PageController {
         mav.addObject("roomKey", 111);
         mav.addObject("user", 1111);
         return mav;
+    }
+
+    @RequestMapping("/getoprecord")
+    @ResponseBody
+    public Map<String, Object> getoprecord(@RequestParam("deviceid")  Long deviceid, HttpServletRequest request) {
+        Map<String, Object> resultMap =  new HashMap<String,Object>();
+        List<Oprecord> list = oprecordService.getOprecordListByDeviceId(deviceid);
+        resultMap.put("result", list);
+        return resultMap;
     }
 }

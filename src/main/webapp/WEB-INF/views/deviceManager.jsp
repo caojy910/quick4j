@@ -147,14 +147,16 @@
                                         </td>
                                         <td>${device.id}</td>
                                         <td>${device.name}</td>
-                                        <td>${device.companyid}</td>
+                                        <td>${device.companyName}</td>
                                         <td>${device.deliverydate}</td>
                                         <td>${device.state}</td>
                                         <td>${device.enddate}</td>
                                         <td>${device.brand}</td>
                                         <td>${device.version}</td>
                                         <td><button id="device_update" onclick="modifydevice(this)">修改</button>
-                                            <button id="device_delete" onclick="deletedevice(this)">删除</button></td>
+                                            <button id="device_delete" onclick="deletedevice(this)">删除</button>
+                                            <button id="device_record" onclick="showrecord(this)">记录</button>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                         </tbody>
@@ -164,6 +166,9 @@
         </div>
     </div>
 </div>
+
+<div id="dialogSelect" style="padding-top:20px;"></div>
+
 <script src="assets/global/scripts/datatable.js" type="text/javascript"></script>
 <script src="assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
@@ -175,6 +180,7 @@
 
 <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
+<script src="assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 
 <script src="assets/global/plugins/moment.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
@@ -183,4 +189,3 @@
 <script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
 
-<script src="assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>

@@ -86,4 +86,8 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
+    <!--配置spring工具类 -->
+    <bean id="SpringContextUtil" class="com.eliteams.quick4j.core.util.SpringContextUtil"
+          scope="singleton"></bean>
+
 </beans>

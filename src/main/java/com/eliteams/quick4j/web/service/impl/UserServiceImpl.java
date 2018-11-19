@@ -63,4 +63,24 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
         return list.get(0);
     }
 
+    @Override
+    public String selectFullNameById(Long id) {
+        UserExample example = new UserExample();
+        example.createCriteria().andIdEqualTo(id);
+        final List<User> list = userMapper.selectByExample(example);
+        if (list == null || list.size() == 0)
+            return null;
+        return list.get(0).getFullname();
+    }
+
+    @Override
+    public String selectUserNameById(Long id) {
+        UserExample example = new UserExample();
+        example.createCriteria().andIdEqualTo(id);
+        final List<User> list = userMapper.selectByExample(example);
+        if (list == null || list.size() == 0)
+            return null;
+        return list.get(0).getUsername();
+    }
+
 }

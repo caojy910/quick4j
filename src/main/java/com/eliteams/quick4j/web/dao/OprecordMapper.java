@@ -1,11 +1,12 @@
 package com.eliteams.quick4j.web.dao;
 
+import com.eliteams.quick4j.core.generic.GenericDao;
 import com.eliteams.quick4j.web.model.Oprecord;
 import com.eliteams.quick4j.web.model.OprecordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface OprecordMapper {
+public interface OprecordMapper extends GenericDao<Oprecord, Long> {
     int countByExample(OprecordExample example);
 
     int deleteByExample(OprecordExample example);

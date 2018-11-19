@@ -2,14 +2,13 @@ package com.eliteams.quick4j.web.service.impl;
 
 import com.eliteams.quick4j.core.generic.GenericDao;
 import com.eliteams.quick4j.core.generic.GenericServiceImpl;
+import com.eliteams.quick4j.core.util.SessionUtils;
 import com.eliteams.quick4j.web.dao.EngineerMapper;
 import com.eliteams.quick4j.web.dao.JobMapper;
-import com.eliteams.quick4j.web.model.Engineer;
-import com.eliteams.quick4j.web.model.EngineerExample;
-import com.eliteams.quick4j.web.model.Job;
-import com.eliteams.quick4j.web.model.JobExample;
+import com.eliteams.quick4j.web.model.*;
 import com.eliteams.quick4j.web.service.EngineerService;
 import com.eliteams.quick4j.web.service.JobService;
+import com.eliteams.quick4j.web.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,6 +25,9 @@ public class JobServiceImpl extends GenericServiceImpl<Job, Long> implements Job
 
     @Resource
     private JobMapper jobMapper;
+
+    @Resource
+    private RoleService roleService;
 
     @Override
     public int insert(Job model) {
@@ -66,15 +68,42 @@ public class JobServiceImpl extends GenericServiceImpl<Job, Long> implements Job
 
     @Override
     public List<Job> getHistoryJobs() {
-        JobExample example = new JobExample();
-        example.createCriteria().andJobstateEqualTo(0);
-        return jobMapper.selectByExample(example);
+        return getJobListByJobState(0);
     }
 
     @Override
     public List<Job> getTodoJobs() {
+        return getJobListByJobState(1);
+    }
+
+    private List<Job> getJobListByJobState(int state) {
         JobExample example = new JobExample();
-        example.createCriteria().andJobstateEqualTo(1);
+
+        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
+        if (user == null || user.getCompanyid() == null)
+            return null;
+        final List<Role> roleInfos = roleService.selectRolesByUserId(user.getId());
+        if (!isAdminRole(roleInfos)) {
+            JobExample.Criteria criteria1 = example.createCriteria();
+            criteria1.andCompanyidEqualTo(user.getCompanyid()).andJobstateEqualTo(state).andLocalengineeridEqualTo(user.getId());
+            JobExample.Criteria criteria2 = example.createCriteria();
+            criteria2.andCompanyidEqualTo(user.getCompanyid()).andJobstateEqualTo(state).andRemoteengineeridEqualTo(user.getId());
+            example.or(criteria1);
+            example.or(criteria2);
+        }
+        else
+            example.createCriteria().andCompanyidEqualTo(user.getCompanyid()).andJobstateEqualTo(state);
+
         return jobMapper.selectByExample(example);
+    }
+
+    private boolean isAdminRole(List<Role> roleInfos) {
+        for (Role role : roleInfos) {
+            if (role != null) {
+                if (role.getRoleName().contains("admin"))
+                    return true;
+            }
+        }
+        return false;
     }
 }

@@ -10,6 +10,8 @@ public class Device {
 
     private Long companyid;
 
+    private String companyName;
+
     private Date deliverydate;
 
     private Integer state;
@@ -88,5 +90,13 @@ public class Device {
 
     public void setVersion(String version) {
         this.version = version == null ? null : version.trim();
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

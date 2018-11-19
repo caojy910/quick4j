@@ -1,37 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eliteams.quick4j.web.dao.JobMapper" >
-  <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.Job" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="deciveid" property="deciveid" jdbcType="BIGINT" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="lastsuggest" property="lastsuggest" jdbcType="VARCHAR" />
-    <result column="localengineerid" property="localengineerid" jdbcType="BIGINT" />
-    <result column="remoteengineerid" property="remoteengineerid" jdbcType="BIGINT" />
-    <result column="devicestate" property="devicestate" jdbcType="INTEGER" />
-    <result column="jobstate" property="jobstate" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eliteams.quick4j.web.dao.JobMapper">
+  <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.Job">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="deciveid" jdbcType="BIGINT" property="deciveid" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="lastsuggest" jdbcType="VARCHAR" property="lastsuggest" />
+    <result column="localengineerid" jdbcType="BIGINT" property="localengineerid" />
+    <result column="remoteengineerid" jdbcType="BIGINT" property="remoteengineerid" />
+    <result column="devicestate" jdbcType="INTEGER" property="devicestate" />
+    <result column="jobstate" jdbcType="INTEGER" property="jobstate" />
+    <result column="companyid" jdbcType="BIGINT" property="companyid" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -42,25 +43,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -71,162 +72,171 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, create_time, type, deciveid, description, lastsuggest, localengineerid, remoteengineerid, 
-    devicestate, jobstate
+    devicestate, jobstate, companyid
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eliteams.quick4j.web.model.JobExample" >
+  <select id="selectByExample" parameterType="com.eliteams.quick4j.web.model.JobExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from job
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from job
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from job
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.eliteams.quick4j.web.model.JobExample" >
+  <delete id="deleteByExample" parameterType="com.eliteams.quick4j.web.model.JobExample">
     delete from job
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.eliteams.quick4j.web.model.Job" >
+  <insert id="insert" parameterType="com.eliteams.quick4j.web.model.Job">
     insert into job (id, create_time, type, 
       deciveid, description, lastsuggest, 
       localengineerid, remoteengineerid, devicestate, 
-      jobstate)
+      jobstate, companyid)
     values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, 
       #{deciveid,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{lastsuggest,jdbcType=VARCHAR}, 
       #{localengineerid,jdbcType=BIGINT}, #{remoteengineerid,jdbcType=BIGINT}, #{devicestate,jdbcType=INTEGER}, 
-      #{jobstate,jdbcType=INTEGER})
+      #{jobstate,jdbcType=INTEGER}, #{companyid,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.eliteams.quick4j.web.model.Job" >
+  <insert id="insertSelective" parameterType="com.eliteams.quick4j.web.model.Job">
     insert into job
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="deciveid != null" >
+      <if test="deciveid != null">
         deciveid,
       </if>
-      <if test="description != null" >
+      <if test="description != null">
         description,
       </if>
-      <if test="lastsuggest != null" >
+      <if test="lastsuggest != null">
         lastsuggest,
       </if>
-      <if test="localengineerid != null" >
+      <if test="localengineerid != null">
         localengineerid,
       </if>
-      <if test="remoteengineerid != null" >
+      <if test="remoteengineerid != null">
         remoteengineerid,
       </if>
-      <if test="devicestate != null" >
+      <if test="devicestate != null">
         devicestate,
       </if>
-      <if test="jobstate != null" >
+      <if test="jobstate != null">
         jobstate,
       </if>
+      <if test="companyid != null">
+        companyid,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="deciveid != null" >
+      <if test="deciveid != null">
         #{deciveid,jdbcType=BIGINT},
       </if>
-      <if test="description != null" >
+      <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="lastsuggest != null" >
+      <if test="lastsuggest != null">
         #{lastsuggest,jdbcType=VARCHAR},
       </if>
-      <if test="localengineerid != null" >
+      <if test="localengineerid != null">
         #{localengineerid,jdbcType=BIGINT},
       </if>
-      <if test="remoteengineerid != null" >
+      <if test="remoteengineerid != null">
         #{remoteengineerid,jdbcType=BIGINT},
       </if>
-      <if test="devicestate != null" >
+      <if test="devicestate != null">
         #{devicestate,jdbcType=INTEGER},
       </if>
-      <if test="jobstate != null" >
+      <if test="jobstate != null">
         #{jobstate,jdbcType=INTEGER},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.eliteams.quick4j.web.model.JobExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.eliteams.quick4j.web.model.JobExample" resultType="java.lang.Integer">
     select count(*) from job
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update job
-    <set >
-      <if test="record.id != null" >
+    <set>
+      <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.createTime != null" >
+      <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.type != null" >
+      <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.deciveid != null" >
+      <if test="record.deciveid != null">
         deciveid = #{record.deciveid,jdbcType=BIGINT},
       </if>
-      <if test="record.description != null" >
+      <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.lastsuggest != null" >
+      <if test="record.lastsuggest != null">
         lastsuggest = #{record.lastsuggest,jdbcType=VARCHAR},
       </if>
-      <if test="record.localengineerid != null" >
+      <if test="record.localengineerid != null">
         localengineerid = #{record.localengineerid,jdbcType=BIGINT},
       </if>
-      <if test="record.remoteengineerid != null" >
+      <if test="record.remoteengineerid != null">
         remoteengineerid = #{record.remoteengineerid,jdbcType=BIGINT},
       </if>
-      <if test="record.devicestate != null" >
+      <if test="record.devicestate != null">
         devicestate = #{record.devicestate,jdbcType=INTEGER},
       </if>
-      <if test="record.jobstate != null" >
+      <if test="record.jobstate != null">
         jobstate = #{record.jobstate,jdbcType=INTEGER},
       </if>
+      <if test="record.companyid != null">
+        companyid = #{record.companyid,jdbcType=BIGINT},
+      </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update job
     set id = #{record.id,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -237,45 +247,49 @@
       localengineerid = #{record.localengineerid,jdbcType=BIGINT},
       remoteengineerid = #{record.remoteengineerid,jdbcType=BIGINT},
       devicestate = #{record.devicestate,jdbcType=INTEGER},
-      jobstate = #{record.jobstate,jdbcType=INTEGER}
-    <if test="_parameter != null" >
+      jobstate = #{record.jobstate,jdbcType=INTEGER},
+      companyid = #{record.companyid,jdbcType=BIGINT}
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eliteams.quick4j.web.model.Job" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.eliteams.quick4j.web.model.Job">
     update job
-    <set >
-      <if test="createTime != null" >
+    <set>
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="deciveid != null" >
+      <if test="deciveid != null">
         deciveid = #{deciveid,jdbcType=BIGINT},
       </if>
-      <if test="description != null" >
+      <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="lastsuggest != null" >
+      <if test="lastsuggest != null">
         lastsuggest = #{lastsuggest,jdbcType=VARCHAR},
       </if>
-      <if test="localengineerid != null" >
+      <if test="localengineerid != null">
         localengineerid = #{localengineerid,jdbcType=BIGINT},
       </if>
-      <if test="remoteengineerid != null" >
+      <if test="remoteengineerid != null">
         remoteengineerid = #{remoteengineerid,jdbcType=BIGINT},
       </if>
-      <if test="devicestate != null" >
+      <if test="devicestate != null">
         devicestate = #{devicestate,jdbcType=INTEGER},
       </if>
-      <if test="jobstate != null" >
+      <if test="jobstate != null">
         jobstate = #{jobstate,jdbcType=INTEGER},
+      </if>
+      <if test="companyid != null">
+        companyid = #{companyid,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eliteams.quick4j.web.model.Job" >
+  <update id="updateByPrimaryKey" parameterType="com.eliteams.quick4j.web.model.Job">
     update job
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       type = #{type,jdbcType=INTEGER},
@@ -285,7 +299,8 @@
       localengineerid = #{localengineerid,jdbcType=BIGINT},
       remoteengineerid = #{remoteengineerid,jdbcType=BIGINT},
       devicestate = #{devicestate,jdbcType=INTEGER},
-      jobstate = #{jobstate,jdbcType=INTEGER}
+      jobstate = #{jobstate,jdbcType=INTEGER},
+      companyid = #{companyid,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

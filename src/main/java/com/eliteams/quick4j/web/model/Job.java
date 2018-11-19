@@ -3,6 +3,7 @@ package com.eliteams.quick4j.web.model;
 import java.util.Date;
 
 public class Job {
+
     private Long id;
 
     private Date createTime;
@@ -17,11 +18,17 @@ public class Job {
 
     private Long localengineerid;
 
+    private String localengineerName;
+
     private Long remoteengineerid;
+
+    private String remoteengineerName;
 
     private Integer devicestate;
 
     private Integer jobstate;
+
+    private Long companyid;
 
     public Long getId() {
         return id;
@@ -101,5 +108,29 @@ public class Job {
 
     public void setJobstate(Integer jobstate) {
         this.jobstate = jobstate;
+    }
+
+    public Long getCompanyid() {
+        return companyid;
+    }
+
+    public void setCompanyid(Long companyid) {
+        this.companyid = companyid;
+    }
+
+    public String getLocalengineerName() {
+        return localengineerName;
+    }
+
+    public void setLocalengineerName(String localengineerName) {
+        this.localengineerName = localengineerName;
+    }
+
+    public String getRemoteengineerName() {
+        return remoteengineerName;
+    }
+
+    public void setRemoteengineerName(String remoteengineerName) {
+        this.remoteengineerName = remoteengineerName;
     }
 }

@@ -724,6 +724,66 @@ public class JobExample {
             addCriterion("jobstate not between", value1, value2, "jobstate");
             return (Criteria) this;
         }
+
+        public Criteria andCompanyidIsNull() {
+            addCriterion("companyid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidIsNotNull() {
+            addCriterion("companyid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidEqualTo(Long value) {
+            addCriterion("companyid =", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidNotEqualTo(Long value) {
+            addCriterion("companyid <>", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidGreaterThan(Long value) {
+            addCriterion("companyid >", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidGreaterThanOrEqualTo(Long value) {
+            addCriterion("companyid >=", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidLessThan(Long value) {
+            addCriterion("companyid <", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidLessThanOrEqualTo(Long value) {
+            addCriterion("companyid <=", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidIn(List<Long> values) {
+            addCriterion("companyid in", values, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidNotIn(List<Long> values) {
+            addCriterion("companyid not in", values, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidBetween(Long value1, Long value2) {
+            addCriterion("companyid between", value1, value2, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidNotBetween(Long value1, Long value2) {
+            addCriterion("companyid not between", value1, value2, "companyid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

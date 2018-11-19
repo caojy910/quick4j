@@ -1,5 +1,6 @@
 package com.eliteams.quick4j.web.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Oprecord {
@@ -39,8 +40,11 @@ public class Oprecord {
         this.opengineer = opengineer;
     }
 
-    public Date getOpdate() {
-        return opdate;
+    public String getOpdate() {
+        if (opdate == null)
+            return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(opdate);
     }
 
     public void setOpdate(Date opdate) {

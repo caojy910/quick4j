@@ -116,7 +116,7 @@
                                                     <%--});--%>
                                                     <%--});--%>
                                                     <%--</script>--%>
-                                                    <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                                                    <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
                                                         <input type="text" class="form-control" readonly="" name="finishtime" id="form_job_finishtime">
                                                         <span class="input-group-btn">
                                                             <button class="btn default" type="button">
@@ -183,8 +183,8 @@
                                 <td>${job.deciveid}</td>
                                 <td>${job.deciveid}</td>
                                 <td>${job.description}</td>
-                                <td>${job.localengineerid}</td>
-                                <td>${job.remoteengineerid}</td>
+                                <td>${job.localengineerName}</td>
+                                <td>${job.remoteengineerName}</td>
                                 <td>${job.jobstate}</td>
                                 <td><a href="rest/page/rtc?jobid=${job.id}" target="_blank">开始协助</a></td>
                             </tr>
@@ -201,3 +201,16 @@
 <script src="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/profile.min.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/table-datatables-managed.js" type="text/javascript"></script>
+
+<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+
+<script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+<script src="assets/global/plugins/moment.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+
+
+<script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>

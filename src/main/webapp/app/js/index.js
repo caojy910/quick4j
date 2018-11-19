@@ -12,7 +12,7 @@ $(function() {
 
                 $('#index-page-title').text($(this).find(".title").html());
                 // 添加选中 打开的样式
-                // $(this).addClass('active');
+                $(this).addClass('active');
             });
         };
 

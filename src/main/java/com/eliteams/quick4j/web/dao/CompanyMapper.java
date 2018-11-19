@@ -1,11 +1,12 @@
 package com.eliteams.quick4j.web.dao;
 
+import com.eliteams.quick4j.core.generic.GenericDao;
 import com.eliteams.quick4j.web.model.Company;
 import com.eliteams.quick4j.web.model.CompanyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface CompanyMapper {
+public interface CompanyMapper  extends GenericDao<Company, Long> {
     int countByExample(CompanyExample example);
 
     int deleteByExample(CompanyExample example);

@@ -63,7 +63,7 @@
                                             return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
                                         }
                                     </script>
-                                    <form id="addlocalengineersub" class="form-horizontal form-bordered" action="rest/page/addlocalengineer" method="post" target="id_iframe">
+                                    <form id="addlocalengineersub" class="form-horizontal form-bordered" action="rest/page/addlocalengineer" enctype="multipart/form-data" method="post" target="id_iframe">
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">姓名</label>
@@ -73,8 +73,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">头像</label>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" maxlength="25" name="headimg" id="headimg">
+                                                <div class="col-md-7">
+                                                    <%--<input type="text" class="form-control" maxlength="25" name="headimg" id="headimg">--%>
+                                                    <input type="file" class="form-control" name="headimg" id="headimg" accept="image/jpeg,image/png">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -209,7 +210,7 @@
                                             return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
                                         }
                                     </script>
-                                    <form id="addremoteengineersub" class="form-horizontal form-bordered" action="rest/page/addremoteengineer" method="post" target="id_iframe_1">
+                                    <form id="addremoteengineersub" class="form-horizontal form-bordered" action="rest/page/addremoteengineer" enctype="multipart/form-data" method="post" target="id_iframe_1">
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">姓名</label>
@@ -219,8 +220,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">头像</label>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" maxlength="25" name="headimg" id="headimg1">
+                                                <div class="col-md-7">
+                                                    <%--<input type="text" class="form-control" maxlength="25" name="headimg" id="headimg1">--%>
+                                                    <input type="file" class="form-control" name="headimg" id="headimg1" accept="image/jpeg,image/png">
                                                 </div>
                                             </div>
                                             <div class="form-group">
