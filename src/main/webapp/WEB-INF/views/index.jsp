@@ -204,12 +204,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </ul>
                         </li>
 
-                        <li class="">
-                            <a href="rest/page/rtc" id="btn-remoteassist">
-                                <i class="fa fa-home"></i><span class="title"> 远程协助 </span><span
-                                    class="arrow "> </span>
-                            </a>
-                        </li>
+                        <%--<li class="">--%>
+                            <%--<a href="rest/page/rtc" id="btn-remoteassist">--%>
+                                <%--<i class="fa fa-home"></i><span class="title"> 远程协助 </span><span--%>
+                                    <%--class="arrow "> </span>--%>
+                            <%--</a>--%>
+                        <%--</li>--%>
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>

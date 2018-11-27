@@ -4,6 +4,7 @@ import com.alibaba.druid.util.Base64;
 import com.eliteams.quick4j.core.util.SessionUtils;
 import com.eliteams.quick4j.web.model.*;
 import com.eliteams.quick4j.web.service.*;
+import net.sf.json.JSON;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -107,6 +108,9 @@ public class PageController {
         catch (Exception ex) {
             ex.printStackTrace();
         }
+        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
+        if (user != null && user.getCompanyid() != null)
+            device.setCompanyid(user.getCompanyid());
 
         deviceService.insert(device);
         List<Device> list = deviceService.getDevices();
@@ -129,6 +133,13 @@ public class PageController {
         return mav;
     }
 
+    @RequestMapping(value = "/getEngineerHeadImg", method = RequestMethod.POST)
+    @ResponseBody
+    public String getEngineerHeadImg(@RequestParam("engineerid") Long id) {
+        byte[] headImg = engineerService.getHeadImgByEngieerId(id);
+        return Base64.byteArrayToBase64(headImg);
+    }
+
     @RequestMapping(value = "/addlocalengineer", method = RequestMethod.POST)
     public ModelAndView adddlocalengineer(@RequestParam("name") String name, @RequestParam("headimg") MultipartFile headimg, @RequestParam("number") String number, @RequestParam("company") String company,
                                           @RequestParam("partment") String partment, @RequestParam("level") String level) {
@@ -146,16 +157,22 @@ public class PageController {
                                      String partment, String level, int type) {
         Engineer engineer = new Engineer();
         engineer.setName(name);
-        String base64Img = "";
-        if (headimg != null) {
-            try {
-                byte[] imgbuffer = headimg.getBytes();
-                base64Img = Base64.byteArrayToBase64(imgbuffer);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+//        String base64Img = "";
+//        if (headimg != null) {
+//            try {
+//                byte[] imgbuffer = headimg.getBytes();
+//                base64Img = Base64.byteArrayToBase64(imgbuffer);
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+        try {
+            if (headimg != null && headimg.getBytes().length < 65535)
+                engineer.setHeadimg(headimg.getBytes());
         }
-        engineer.setHeadimg(base64Img);
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
         engineer.setPartment(partment);
         engineer.setLevel(1);
         engineer.setType(type);
@@ -243,6 +260,9 @@ public class PageController {
         job.setCreateTime(new Date());
         job.setDescription(desc);
         job.setJobstate(1);
+        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
+        if (user != null && user.getCompanyid() != null)
+            job.setCompanyid(user.getCompanyid());
         jobService.insert(job);
 
         List<Job> joblist = jobService.getTodoJobs();

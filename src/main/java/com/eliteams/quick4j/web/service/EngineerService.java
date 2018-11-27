@@ -24,4 +24,6 @@ public interface EngineerService extends GenericService<Engineer, Long> {
     List<Engineer> getLocalEngineers();
 
     List<Engineer> getRemoteEngineers();
+
+    byte[] getHeadImgByEngieerId(Long id);
 }

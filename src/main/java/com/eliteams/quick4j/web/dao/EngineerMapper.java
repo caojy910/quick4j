@@ -17,15 +17,21 @@ public interface EngineerMapper extends GenericDao<Engineer, Long> {
 
     int insertSelective(Engineer record);
 
+    List<Engineer> selectByExampleWithBLOBs(EngineerExample example);
+
     List<Engineer> selectByExample(EngineerExample example);
 
     Engineer selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Engineer record, @Param("example") EngineerExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") Engineer record, @Param("example") EngineerExample example);
+
     int updateByExample(@Param("record") Engineer record, @Param("example") EngineerExample example);
 
     int updateByPrimaryKeySelective(Engineer record);
+
+    int updateByPrimaryKeyWithBLOBs(Engineer record);
 
     int updateByPrimaryKey(Engineer record);
 }

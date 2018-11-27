@@ -234,76 +234,6 @@ public class EngineerExample {
             return (Criteria) this;
         }
 
-        public Criteria andHeadimgIsNull() {
-            addCriterion("headimg is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgIsNotNull() {
-            addCriterion("headimg is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgEqualTo(String value) {
-            addCriterion("headimg =", value, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgNotEqualTo(String value) {
-            addCriterion("headimg <>", value, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgGreaterThan(String value) {
-            addCriterion("headimg >", value, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgGreaterThanOrEqualTo(String value) {
-            addCriterion("headimg >=", value, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgLessThan(String value) {
-            addCriterion("headimg <", value, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgLessThanOrEqualTo(String value) {
-            addCriterion("headimg <=", value, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgLike(String value) {
-            addCriterion("headimg like", value, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgNotLike(String value) {
-            addCriterion("headimg not like", value, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgIn(List<String> values) {
-            addCriterion("headimg in", values, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgNotIn(List<String> values) {
-            addCriterion("headimg not in", values, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgBetween(String value1, String value2) {
-            addCriterion("headimg between", value1, value2, "headimg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadimgNotBetween(String value1, String value2) {
-            addCriterion("headimg not between", value1, value2, "headimg");
-            return (Criteria) this;
-        }
-
         public Criteria andCompanyidIsNull() {
             addCriterion("companyid is null");
             return (Criteria) this;
@@ -551,6 +481,66 @@ public class EngineerExample {
 
         public Criteria andLevelNotBetween(Integer value1, Integer value2) {
             addCriterion("level not between", value1, value2, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIsNull() {
+            addCriterion("number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIsNotNull() {
+            addCriterion("number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberEqualTo(Integer value) {
+            addCriterion("number =", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotEqualTo(Integer value) {
+            addCriterion("number <>", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberGreaterThan(Integer value) {
+            addCriterion("number >", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("number >=", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLessThan(Integer value) {
+            addCriterion("number <", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("number <=", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIn(List<Integer> values) {
+            addCriterion("number in", values, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotIn(List<Integer> values) {
+            addCriterion("number not in", values, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberBetween(Integer value1, Integer value2) {
+            addCriterion("number between", value1, value2, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("number not between", value1, value2, "number");
             return (Criteria) this;
         }
     }

@@ -5,8 +5,6 @@ public class Engineer {
 
     private String name;
 
-    private String headimg;
-
     private Long companyid;
 
     private String partment;
@@ -14,6 +12,10 @@ public class Engineer {
     private Integer type;
 
     private Integer level;
+
+    private Integer number;
+
+    private byte[] headimg;
 
     public Long getId() {
         return id;
@@ -29,14 +31,6 @@ public class Engineer {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public String getHeadimg() {
-        return headimg;
-    }
-
-    public void setHeadimg(String headimg) {
-        this.headimg = headimg == null ? null : headimg.trim();
     }
 
     public Long getCompanyid() {
@@ -69,5 +63,21 @@ public class Engineer {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public byte[] getHeadimg() {
+        return headimg;
+    }
+
+    public void setHeadimg(byte[] headimg) {
+        this.headimg = headimg;
     }
 }

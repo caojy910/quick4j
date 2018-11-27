@@ -74,7 +74,7 @@ public class EngineerServiceImpl extends GenericServiceImpl<Engineer, Long> impl
     public List<Engineer> getLocalEngineers() {
         EngineerExample example = new EngineerExample();
         example.createCriteria().andTypeEqualTo(0);
-        return engineerMapper.selectByExample(example);
+        return engineerMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
@@ -83,4 +83,16 @@ public class EngineerServiceImpl extends GenericServiceImpl<Engineer, Long> impl
         example.createCriteria().andTypeEqualTo(1);
         return engineerMapper.selectByExample(example);
     }
+
+    @Override
+    public byte[] getHeadImgByEngieerId(Long id) {
+        EngineerExample example = new EngineerExample();
+        example.createCriteria().andIdEqualTo(id);
+        List<Engineer> engineers = engineerMapper.selectByExampleWithBLOBs(example);
+        if (engineers != null && engineers.size() > 0) {
+            return engineers.get(0).getHeadimg();
+        }
+        return null;
+    }
+
 }

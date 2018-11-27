@@ -53,17 +53,7 @@
                                     <h4 class="modal-title">Modal Title</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <script type="text/javascript">
-                                        function sub() {
-                                            // jquery 表单提交
-                                            $("#addlocalengineersub").submit(function(message) {
-                                                // 对于表单提交成功后处理，message为返回内容
-                                            });
-
-                                            return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-                                        }
-                                    </script>
-                                    <form id="addlocalengineersub" class="form-horizontal form-bordered" action="rest/page/addlocalengineer" enctype="multipart/form-data" method="post" target="id_iframe">
+                                    <form id="addlocalengineersub" class="form-horizontal form-bordered" action="rest/page/addlocalengineer" enctype="multipart/form-data" method="post" onsubmit="return addlocalengineer();">
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">姓名</label>
@@ -113,8 +103,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
-
                                 </div>
                             </div>
                             <!-- /.modal-content -->
@@ -149,7 +137,20 @@
                                         </td>
                                         <td>${engineer.id}</td>
                                         <td>${engineer.name}</td>
-                                        <td>${engineer.headimg}</td>
+                                        <td><img id="headimg${engineer.id}" src="" width="auto" height="20"/><script>
+                                            $.ajax({
+                                                    type:"POST",
+                                                    url:"rest/page/getEngineerHeadImg",
+                                                    data: {
+                                                        engineerid: ${engineer.id}
+                                                    },
+                                                    datatype: "json",
+                                                    success:function(data){
+                                                        $("#headimg${engineer.id}").attr("src","data:image;base64,"+data);
+                                                    }   ,
+                                                }
+                                            )
+                                        </script></td>
                                         <td>${engineer.companyid}</td>
                                         <td>${engineer.partment}</td>
                                         <td>${engineer.level}</td>
@@ -200,16 +201,6 @@
                                     <h4 class="modal-title">Modal Title</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <script type="text/javascript">
-                                        function sub() {
-                                            // jquery 表单提交
-                                            $("#addlocalengineersub").submit(function(message) {
-                                                // 对于表单提交成功后处理，message为返回内容
-                                            });
-
-                                            return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-                                        }
-                                    </script>
                                     <form id="addremoteengineersub" class="form-horizontal form-bordered" action="rest/page/addremoteengineer" enctype="multipart/form-data" method="post" target="id_iframe_1">
                                         <div class="form-body">
                                             <div class="form-group">
@@ -260,8 +251,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <iframe id="id_iframe_1" name="nm_iframe" style="display:none;"></iframe>
-
                                 </div>
                             </div>
                             <!-- /.modal-content -->
@@ -296,7 +285,20 @@
                                 </td>
                                 <td>${engineer.id}</td>
                                 <td>${engineer.name}</td>
-                                <td>${engineer.headimg}</td>
+                                <td><img id="headimg${engineer.id}" src="" width="auto" height="20"/><script>
+                                    $.ajax({
+                                            type:"POST",
+                                            url:"rest/page/getEngineerHeadImg",
+                                            data: {
+                                                engineerid: ${engineer.id}
+                                            },
+                                            datatype: "json",
+                                            success:function(data){
+                                                $("#headimg${engineer.id}").attr("src","data:image;base64,"+data);
+                                            }   ,
+                                        }
+                                    )
+                                </script></td>
                                 <td>${engineer.companyid}</td>
                                 <td>${engineer.partment}</td>
                                 <td>${engineer.level}</td>
@@ -314,3 +316,19 @@
 <script src="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/profile.min.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/table-datatables-managed.js" type="text/javascript"></script>
+
+
+<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+
+<script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script src="assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+
+<script src="assets/global/plugins/moment.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+
+
+<script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+

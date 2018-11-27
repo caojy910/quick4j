@@ -83,4 +83,10 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
         return list.get(0).getUsername();
     }
 
+    @Override
+    public List<User> getEngieerUsers() {
+        UserExample example = new UserExample();
+        return userMapper.selectByExample(example);
+    }
+
 }
