@@ -28,6 +28,11 @@ public class CompanyServiceImpl extends GenericServiceImpl<Company, Long> implem
         return companyList.get(0).getName();
     }
 
+    @Override
+    public List<Company> getCompanyList() {
+        return companyMapper.selectByExample(new CompanyExample());
+    }
+
 
     @Override
     public int insert(Company model) {

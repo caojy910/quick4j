@@ -151,7 +151,7 @@
                                                 }
                                             )
                                         </script></td>
-                                        <td>${engineer.companyid}</td>
+                                        <td>${engineer.companyName}</td>
                                         <td>${engineer.partment}</td>
                                         <td>${engineer.level}</td>
                                     </tr>
@@ -299,7 +299,7 @@
                                         }
                                     )
                                 </script></td>
-                                <td>${engineer.companyid}</td>
+                                <td>${engineer.companyName}</td>
                                 <td>${engineer.partment}</td>
                                 <td>${engineer.level}</td>
                             </tr>

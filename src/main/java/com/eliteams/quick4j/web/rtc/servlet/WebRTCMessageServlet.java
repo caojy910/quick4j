@@ -12,11 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import com.eliteams.quick4j.web.rtc.room.WebRTCRoomManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @WebServlet(urlPatterns = {"/message"})
 public class WebRTCMessageServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private org.slf4j.Logger logger = LoggerFactory.getLogger(WebRTCMessageServlet.class);
+
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,6 +40,7 @@ public class WebRTCMessageServlet extends HttpServlet {
         }
 		
 		String message = sb.toString();
+		logger.info(message);
 		JSONObject json = JSONObject.fromObject(message);
 		if (json != null) {
 			String type = json.getString("type");

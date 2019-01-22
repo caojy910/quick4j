@@ -40,11 +40,13 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table tableName="company" />
-        <table tableName="device" />
-        <table tableName="oprecord" />
-        <table tableName="engineer" />
-        <table tableName="job" />
+        <table tableName="user" />
+
+        <!--<table tableName="company" />-->
+        <!--<table tableName="device" />-->
+        <!--<table tableName="oprecord" />-->
+        <!--<table tableName="engineer" />-->
+        <!--<table tableName="job" />-->
 
     </context>
 </generatorConfiguration>

@@ -375,6 +375,66 @@ public class UserExample {
             return (Criteria) this;
         }
 
+        public Criteria andRoleIsNull() {
+            addCriterion("role is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIsNotNull() {
+            addCriterion("role is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEqualTo(Integer value) {
+            addCriterion("role =", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotEqualTo(Integer value) {
+            addCriterion("role <>", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleGreaterThan(Integer value) {
+            addCriterion("role >", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("role >=", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleLessThan(Integer value) {
+            addCriterion("role <", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleLessThanOrEqualTo(Integer value) {
+            addCriterion("role <=", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIn(List<Integer> values) {
+            addCriterion("role in", values, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotIn(List<Integer> values) {
+            addCriterion("role not in", values, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleBetween(Integer value1, Integer value2) {
+            addCriterion("role between", value1, value2, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotBetween(Integer value1, Integer value2) {
+            addCriterion("role not between", value1, value2, "role");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -432,6 +492,136 @@ public class UserExample {
 
         public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidIsNull() {
+            addCriterion("companyid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidIsNotNull() {
+            addCriterion("companyid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidEqualTo(Long value) {
+            addCriterion("companyid =", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidNotEqualTo(Long value) {
+            addCriterion("companyid <>", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidGreaterThan(Long value) {
+            addCriterion("companyid >", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidGreaterThanOrEqualTo(Long value) {
+            addCriterion("companyid >=", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidLessThan(Long value) {
+            addCriterion("companyid <", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidLessThanOrEqualTo(Long value) {
+            addCriterion("companyid <=", value, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidIn(List<Long> values) {
+            addCriterion("companyid in", values, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidNotIn(List<Long> values) {
+            addCriterion("companyid not in", values, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidBetween(Long value1, Long value2) {
+            addCriterion("companyid between", value1, value2, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyidNotBetween(Long value1, Long value2) {
+            addCriterion("companyid not between", value1, value2, "companyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameIsNull() {
+            addCriterion("fullname is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameIsNotNull() {
+            addCriterion("fullname is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameEqualTo(String value) {
+            addCriterion("fullname =", value, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameNotEqualTo(String value) {
+            addCriterion("fullname <>", value, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameGreaterThan(String value) {
+            addCriterion("fullname >", value, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameGreaterThanOrEqualTo(String value) {
+            addCriterion("fullname >=", value, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameLessThan(String value) {
+            addCriterion("fullname <", value, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameLessThanOrEqualTo(String value) {
+            addCriterion("fullname <=", value, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameLike(String value) {
+            addCriterion("fullname like", value, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameNotLike(String value) {
+            addCriterion("fullname not like", value, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameIn(List<String> values) {
+            addCriterion("fullname in", values, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameNotIn(List<String> values) {
+            addCriterion("fullname not in", values, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameBetween(String value1, String value2) {
+            addCriterion("fullname between", value1, value2, "fullname");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullnameNotBetween(String value1, String value2) {
+            addCriterion("fullname not between", value1, value2, "fullname");
             return (Criteria) this;
         }
     }

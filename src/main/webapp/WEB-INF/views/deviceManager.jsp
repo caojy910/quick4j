@@ -70,7 +70,12 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">所属企业</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" maxlength="25" name="company" id="form_company">
+                                                    <select id="form_company">
+                                                        <c:forEach items="${companies}" var="company">
+                                                            <option value="${company.id}">${company.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                        <%--<input type="text" class="form-control" maxlength="25" name="company" id="form_company">--%>
                                                 </div>
                                             </div>
                                             <div class="form-group">

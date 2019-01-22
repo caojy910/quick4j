@@ -61,13 +61,22 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">工单类型</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" maxlength="25" name="type" id="form_job_type">
+                                                    <select name="type" id="form_job_type">
+                                                        <option value="0">日常维护</option>
+                                                        <option value="1">设备维修</option>
+                                                    </select>
+                                                    <%--<input type="text" class="form-control" maxlength="25" name="type" id="form_job_type">--%>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">设备名称</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" maxlength="25" name="device" id="form_job_device">
+                                                    <select name="device" id="form_job_device">
+                                                        <c:forEach items="${devices}" var="device">
+                                                            <option value="${device.id}">${device.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <%--<input type="text" class="form-control" maxlength="25" name="device" id="form_job_device">--%>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -79,7 +88,12 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">所属企业</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control" maxlength="25" name="company" id="form_job_company">
+                                                    <select name="company" id="form_job_company">
+                                                        <c:forEach items="${companies}" var="company">
+                                                            <option value="${company.id}">${company.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <%--<input type="text" class="form-control" maxlength="25" name="company" id="form_job_company">--%>
                                                 </div>
                                             </div>
                                             <div class="form-group">

@@ -1,5 +1,6 @@
 package com.eliteams.quick4j.web.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Job {
@@ -38,8 +39,11 @@ public class Job {
         this.id = id;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getCreateTime() {
+        if (createTime == null)
+            return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(createTime);
     }
 
     public void setCreateTime(Date createTime) {

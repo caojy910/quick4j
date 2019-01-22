@@ -92,7 +92,14 @@ function ajaxsubmitaddjob() {
             url:"rest/page/addjob",
             //提交的数据
             data: {
-                desc: $("#form_job_desc").val()
+                type: $("#form_job_type").val(),
+                device: $("#form_job_device").val(),
+                devicecode: $("#form_job_devicecode").val(),
+                company: $("#form_job_company").val(),
+                desc: $("#form_job_desc").val(),
+                localengineer: $("#form_job_localengineer").val(),
+                remoteengineer: $("#form_job_remoteengineer").val(),
+                finishtime: $("#form_job_finishtime").val()
             },
             //返回数据的格式
             datatype: "html",

@@ -7,6 +7,8 @@ public class Engineer {
 
     private Long companyid;
 
+    private String companyName;
+
     private String partment;
 
     private Integer type;
@@ -79,5 +81,13 @@ public class Engineer {
 
     public void setHeadimg(byte[] headimg) {
         this.headimg = headimg;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

@@ -3,6 +3,7 @@ package com.eliteams.quick4j.web.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 
+import com.eliteams.quick4j.core.util.SessionUtils;
 import org.springframework.stereotype.Service;
 import com.eliteams.quick4j.core.generic.GenericDao;
 import com.eliteams.quick4j.core.generic.GenericServiceImpl;
@@ -86,6 +87,10 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
     @Override
     public List<User> getEngieerUsers() {
         UserExample example = new UserExample();
+        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
+        if (user == null || user.getCompanyid() == null)
+            return null;
+        example.createCriteria().andCompanyidEqualTo(user.getCompanyid());
         return userMapper.selectByExample(example);
     }
 

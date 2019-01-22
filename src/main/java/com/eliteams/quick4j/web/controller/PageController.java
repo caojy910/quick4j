@@ -4,16 +4,11 @@ import com.alibaba.druid.util.Base64;
 import com.eliteams.quick4j.core.util.SessionUtils;
 import com.eliteams.quick4j.web.model.*;
 import com.eliteams.quick4j.web.service.*;
-import net.sf.json.JSON;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,9 +67,11 @@ public class PageController {
         User user = (User) SessionUtils.getSession().getAttribute("userInfo");
         List<Device> list = deviceService.getDevices();
         setDeviceCompanyName(list);
+        List<Company> companyList = companyService.getCompanyList();
 
         ModelAndView mav=new ModelAndView("deviceManager");
         mav.addObject("devices", list);
+        mav.addObject("companies", companyList);
         return mav;
     }
 
@@ -99,6 +96,8 @@ public class PageController {
                           @RequestParam("deliverytime") String deliverytime, @RequestParam("endtime") String endtime) {
         Device device = new Device();
         device.setName(name);
+        if (company != null)
+            device.setCompanyid(Long.parseLong(company));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
@@ -124,12 +123,14 @@ public class PageController {
     @RequestMapping("/engineerManager")
     public ModelAndView engineerManager() {
         List<Engineer> locallist = engineerService.getLocalEngineers();
-        setEnineerNameById(locallist);
+        processEngineerList(locallist);
         List<Engineer> remotelist = engineerService.getRemoteEngineers();
-        setEnineerNameById(remotelist);
+        processEngineerList(remotelist);
         ModelAndView mav=new ModelAndView("engineerManager");
         mav.addObject("localengineers", locallist);
         mav.addObject("remoteengineers", remotelist);
+        List<User> engineers = userService.getEngieerUsers();
+        mav.addObject("allengineers", engineers);
         return mav;
     }
 
@@ -157,15 +158,7 @@ public class PageController {
                                      String partment, String level, int type) {
         Engineer engineer = new Engineer();
         engineer.setName(name);
-//        String base64Img = "";
-//        if (headimg != null) {
-//            try {
-//                byte[] imgbuffer = headimg.getBytes();
-//                base64Img = Base64.byteArrayToBase64(imgbuffer);
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//        }
+
         try {
             if (headimg != null && headimg.getBytes().length < 65535)
                 engineer.setHeadimg(headimg.getBytes());
@@ -178,9 +171,9 @@ public class PageController {
         engineer.setType(type);
         engineerService.insert(engineer);
         List<Engineer> locallist = engineerService.getLocalEngineers();
-        setEnineerNameById(locallist);
+        processEngineerList(locallist);
         List<Engineer> remotelist = engineerService.getRemoteEngineers();
-        setEnineerNameById(remotelist);
+        processEngineerList(remotelist);
         ModelAndView mav=new ModelAndView("engineerManager");
         mav.addObject("localengineers", locallist);
         mav.addObject("remoteengineers", remotelist);
@@ -191,8 +184,13 @@ public class PageController {
     public ModelAndView historyJobManager() {
         List<Job> joblist = jobService.getHistoryJobs();
         setJobEngineerName(joblist);
+        List<Company> companyList = companyService.getCompanyList();
+        List<Device> devices = deviceService.getDevices();
+
         ModelAndView mav=new ModelAndView("jobManager");
         mav.addObject("jobList", joblist);
+        mav.addObject("companies", companyList);
+        mav.addObject("devices", devices);
         return mav;
     }
 
@@ -200,8 +198,13 @@ public class PageController {
     public ModelAndView todoJobManager() {
         List<Job> joblist = jobService.getTodoJobs();
         setJobEngineerName(joblist);
+        List<Company> companyList = companyService.getCompanyList();
+        List<Device> devices = deviceService.getDevices();
+
         ModelAndView mav=new ModelAndView("jobManager");
         mav.addObject("jobList", joblist);
+        mav.addObject("companies", companyList);
+        mav.addObject("devices", devices);
         return mav;
     }
 
@@ -228,12 +231,15 @@ public class PageController {
         }
     }
 
-    private void setEnineerNameById(List<Engineer> engineerList) {
+    private void processEngineerList(List<Engineer> engineerList) {
         if (engineerList != null) {
             for (Engineer engineer : engineerList) {
                 if (engineer != null) {
-                    if (engineer.getId() != null)
-                        engineer.setName(getUserFullNameById(engineer.getId()));
+//                    if (engineer.getId() != null)
+//                        engineer.setName(getUserFullNameById(engineer.getId()));
+                    if (engineer.getCompanyid() != null) {
+                        engineer.setCompanyName(companyService.getComanyNameById(engineer.getCompanyid()));
+                    }
                 }
             }
         }
@@ -250,15 +256,17 @@ public class PageController {
 
     @RequestMapping(value = "/addjob", method = RequestMethod.POST)
     public ModelAndView addjob(
-//                        @RequestParam("type") String type, @RequestParam("device") String device, @RequestParam("devicecode") String devicecode,
-//                       @RequestParam("company") String company, @RequestParam("desc") String desc, @RequestParam("localengineer") String localengineer,
-//                       @RequestParam("remoteengineer") String remoteengineer, @RequestParam("devicestate") String devicestate,
-//                       @RequestParam("finishtime") String finishtime
-            @RequestParam("desc") String desc
+                        @RequestParam("type") Integer type, @RequestParam("device") Long deviceid, @RequestParam("devicecode") String devicecode
+                      , @RequestParam("company") Long companyid, @RequestParam("desc") String desc, @RequestParam("localengineer") String localengineer,
+                       @RequestParam("remoteengineer") String remoteengineer, @RequestParam("finishtime") String finishtime
+//            @RequestParam("desc") String desc
                     ) {
         Job job = new Job();
         job.setCreateTime(new Date());
         job.setDescription(desc);
+        job.setDeciveid(deviceid);
+        job.setCompanyid(companyid);
+        job.setType(type);
         job.setJobstate(1);
         User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
         if (user != null && user.getCompanyid() != null)

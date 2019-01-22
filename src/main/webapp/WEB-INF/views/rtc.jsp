@@ -18,171 +18,207 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 		  })();
 		-->
+		<!-- BEGIN GLOBAL MANDATORY STYLES -->
+		<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+		<!-- END GLOBAL MANDATORY STYLES -->
+
+		<!-- BEGIN THEME STYLES -->
+
+		<link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
+		<link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
+		<!-- END THEME STYLES -->
+
+		<link href="assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+
 		<style type="text/css">
-		a:link {
-			color: #ffffff;
-		}
+			a:link {
+				color: #ffffff;
+			}
 
-		a:visited {
-			color: #ffffff;
-		}
+			a:visited {
+				color: #ffffff;
+			}
 
-		html,body {
-			/*background-color: #000000;*/
-			height: 100%;
-			font-family: Verdana, Arial, Helvetica, sans-serif;
-		}
+			html,body {
+				/*background-color: #000000;*/
+				height: 100%;
+				font-family: Verdana, Arial, Helvetica, sans-serif;
+			}
 
-		body {
-			margin: 0;
-			padding: 0;
-		}
+			body {
+				margin: 2em;
+				padding: 0;
+			}
 
-		#container {
-			background-color: #000000;
-			position: relative;
-			min-height: 100%;
-			width: 100%;
-			margin: 0px auto;
-		}
+			div {
+				color: white;
+			}
 
-		#card {
-			-webkit-transition-property: rotation;
-			-webkit-transition-duration: 2s;
-			-webkit-transform-style: preserve-3d;
-		}
+			#container {
+				background-color: #000000;
+				position: relative;
+				min-height: 100%;
+				width: 100%;
+				margin: 0px auto;
+			}
 
-		#local {
-			position: absolute;
-			width: 100%;
-			-webkit-transform: scale(-1, 1);
-			-webkit-backface-visibility: hidden;
-		}
+			#card {
+				-webkit-transition-property: rotation;
+				-webkit-transition-duration: 2s;
+				-webkit-transform-style: preserve-3d;
+			}
 
-		#remote {
-			position: absolute;
-			width: 100%;
-			-webkit-transform: rotateY(180deg);
-			-webkit-backface-visibility: hidden;
-		}
+			#local {
+				position: absolute;
+				width: 100%;
+				-webkit-transform: scale(-1, 1);
+				-webkit-backface-visibility: hidden;
+			}
 
-		#mini {
-			position: absolute;
-			height: 30%;
-			width: 30%;
-			bottom: 32px;
-			right: 4px;
-			-webkit-transform: scale(-1, 1);
-			opacity: 1.0;
-		}
+			#remote {
+				position: absolute;
+				width: 100%;
+				-webkit-transform: rotateY(180deg);
+				-webkit-backface-visibility: hidden;
+			}
 
-		/*#localVideo {*/
+			#mini {
+				position: absolute;
+				height: 30%;
+				width: 30%;
+				bottom: 32px;
+				right: 4px;
+				-webkit-transform: scale(-1, 1);
+				opacity: 1.0;
+			}
+
+			/*#localVideo {*/
 			/*opacity: 0;*/
 			/*-webkit-transition-property: opacity;*/
 			/*-webkit-transition-duration: 2s;*/
-		/*}*/
+			/*}*/
 
-		/*#remoteVideo {*/
+			#remoteVideo {
+				opacity: 0;
+				-webkit-transition-property: opacity;
+				-webkit-transition-duration: 2s;
+			}
+
+			/*#miniVideo {*/
 			/*opacity: 0;*/
 			/*-webkit-transition-property: opacity;*/
 			/*-webkit-transition-duration: 2s;*/
-		/*}*/
+			/*}*/
 
-		/*#miniVideo {*/
-			/*opacity: 0;*/
-			/*-webkit-transition-property: opacity;*/
-			/*-webkit-transition-duration: 2s;*/
-		/*}*/
+			#footer {
+				spacing: 4px;
+				/*position: absolute;*/
+				bottom: 0;
+				width: 100%;
+				height: 28px;
+				background-color: #3F3F3F;
+				color: rgb(255, 255, 255);
+				font-size: 13px;
+				font-weight: bold;
+				line-height: 28px;
+				text-align: center;
+			}
 
-		#footer {
-			spacing: 4px;
-			/*position: absolute;*/
-			bottom: 0;
-			width: 100%;
-			height: 28px;
-			background-color: #3F3F3F;
-			color: rgb(255, 255, 255);
-			font-size: 13px;
-			font-weight: bold;
-			line-height: 28px;
-			text-align: center;
-		}
+			#hangup {
+				font-size: 13px;
+				font-weight: bold;
+				color: #FFFFFF;
+				width: 128px;
+				height: 24px;
+				background-color: #808080;
+				border-style: solid;
+				border-color: #FFFFFF;
+				margin: 2px;
+			}
 
-		#hangup {
-			font-size: 13px;
-			font-weight: bold;
-			color: #FFFFFF;
-			width: 128px;
-			height: 24px;
-			background-color: #808080;
-			border-style: solid;
-			border-color: #FFFFFF;
-			margin: 2px;
-		}
+			#logo {
+				display: block;
+				top: 4;
+				right: 4;
+				position: absolute;
+				float: right;
+				opacity: 0.5;
+			}
 
-		#logo {
-			display: block;
-			top: 4;
-			right: 4;
-			position: absolute;
-			float: right;
-			opacity: 0.5;
-		}
+			.videoblcok {
+				margin: 2em;
+				border: solid grey 6px;
+				border-radius: 20px;
+				padding: 2em;
+				text-align:center;
+			}
+
+			.screenshotblock {
+				margin: 2em;
+				border: solid grey 6px;
+				border-radius: 20px;
+				padding: 2em;
+			}
+
+			.receiveblock {
+				margin: 2em;
+				border: solid grey 6px;
+				border-radius: 20px;
+				padding: 2em;
+			}
 		</style>
+
 	</head>
 <body>
-	<div>
-		<%--<div id="jobcard" >--%>
-			<%--<label>工单号</label><input id="jobid" type="text"><button onclick="join()">远程协助</button>--%>
-		<%--</div>--%>
-		<%--<div id="card">--%>
-		<%--<div id="local">--%>
-		<%--<video width="100%" height="100%" id="localVideo"--%>
-		<%--autoplay="autoplay" />--%>
-		<%--</div>--%>
-		<%--<div id="remote">--%>
-		<%--<video width="100%" height="100%" id="remoteVideo"--%>
-		<%--autoplay="autoplay"> </video>--%>
-		<%--<div id="mini">--%>
-		<%--<video width="100%" height="100%" id="miniVideo"--%>
-		<%--autoplay="autoplay" />--%>
-		<%--</div>--%>
-		<%--</div>--%>
-		<%--</div>--%>
-
-		<h2>远程协助</h2>
-		<div id="videos">
-			<video id="localVideo" autoplay muted playsinline></video>
-			<video id="remoteVideo" autoplay playsinline></video>
+	<div style="margin:2em">
+		<div class="videoblcok">
+			<h2>远程协助</h2>
+			<div id="videos">
+				<video id="localVideo" height="300" autoplay muted playsinline poster="assets/img/video-preview.jpg"></video>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<video id="remoteVideo" height="300" autoplay playsinline poster="assets/img/remotevideo-preview2.jpg"></video>
+			</div>
 		</div>
 
+		<div class="screenshotblock">
+			<h2>截图标记</h2>
+			<div id="videoCanvas">
+				<div id="controls">
+					标记颜色：
+					<select id="strokeStyleSelect">
+						<option value="red" style="color:red">红色</option>
+						<option value="green" style="color:green">绿色</option>
+						<option value="blue" style="color:blue">蓝色</option>
+						<option value="orange" style="color:orange">橙色</option>
+					</select>
 
+					<input type="button" name="eraseAllButton" id="eraseAllButton" value="清除标记" />
+				</div>
 
-		<div id="videoCanvas">
-			<div id="controls">
-				标记：
-				<select id="strokeStyleSelect">
-					<option value="red">红色</option>
-					<option value="green">绿色</option>
-					<option value="blue">蓝色</option>
-					<option value="orange">橙色</option>
-				</select>
+				<canvas id="photo"></canvas>
 
-				<input type="button" name="eraseAllButton" id="eraseAllButton" value="清除标记" />
 			</div>
 
-			<canvas id="photo"></canvas>
+			<div id="buttons">
+				<button id="snap">截屏</button><span>      </span><button id="send">发送图片</button>
+				<%--<span> or </span>--%>
+				<%--<button id="snapAndSend">Snap &amp; Send</button>--%>
+			</div>
+
+			<%--<div>--%>
+			<%----%>
+			<%--<div class="col-md-9">--%>
+			<%--<input type="text"><span>      </span><button id="sendmessage">发送消息</button>--%>
+			<%--</div>--%>
+			<%--</div>--%>
 
 		</div>
 
-
-		<div id="buttons">
-			<button id="snap">截屏</button><span>      </span><button id="send">发送</button>
-			<%--<span> or </span>--%>
-			<%--<button id="snapAndSend">Snap &amp; Send</button>--%>
-		</div>
-
-		<div id="incoming">
+		<div id="incoming" class="receiveblock">
 			<h2>接收图片</h2>
 			<div id="trail"></div>
 		</div>
@@ -286,11 +322,13 @@
 		
 		function onUserMediaSuccess(stream) {
 			console.log("User has granted access to local media.");
-			var url = URL.createObjectURL(stream);
+			// var url = URL.createObjectURL(stream);
 			// localVideo.style.opacity = 1;
-			localVideo.src = url;
-			localStream = stream;
-			// Caller creates PeerConnection.
+			// localVideo.src = url;
+            localVideo.srcObject = stream;
+            localStream = stream;
+            remoteVideo.style.opacity = 1;
+            // Caller creates PeerConnection.
 			if (initiator == 1)
 				maybeStart();
 		}
@@ -338,6 +376,7 @@
         }
 
         function sendMessage(message) {
+            console.log("sendMessage " + message);
 			var msgString = JSON.stringify(message);
 			console.log('发出信息 : ' + msgString);
 			path = 'message?r=' + roomKey + '&u=' + user;
@@ -866,11 +905,12 @@
 		function onRemoteStreamAdded(event) {
 			console.log("Remote stream added.");
 			console.log(event);
-			var url = URL.createObjectURL(event.stream);
+			// var url = URL.createObjectURL(event.stream);
 			// miniVideo.src = localVideo.src;
-			remoteVideo.src = url;
+			// remoteVideo.src = url;
+			remoteVideo.srcObject = event.stream;
 			remoteStream = event.stream;
-			waitForRemoteVideo();
+			// waitForRemoteVideo();
 		}
 		function onRemoteStreamRemoved(event) {
 			console.log("Remote stream removed.");
@@ -926,7 +966,7 @@
 			setTimeout(function() {
 				// localVideo.src = miniVideo.src;
 				// miniVideo.src = "";
-				remoteVideo.src = ""
+				// remoteVideo.src = ""
 			}, 500);
 			// miniVideo.style.opacity = 0;
 			// remoteVideo.style.opacity = 0;
