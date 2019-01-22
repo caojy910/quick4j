@@ -6,8 +6,10 @@ import com.eliteams.quick4j.core.util.SessionUtils;
 import com.eliteams.quick4j.web.dao.DeviceMapper;
 import com.eliteams.quick4j.web.model.Device;
 import com.eliteams.quick4j.web.model.DeviceExample;
+import com.eliteams.quick4j.web.model.Role;
 import com.eliteams.quick4j.web.model.User;
 import com.eliteams.quick4j.web.service.DeviceService;
+import com.eliteams.quick4j.web.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +26,9 @@ public class DeviceServiceImpl extends GenericServiceImpl<Device, Long> implemen
 
     @Resource
     private DeviceMapper deviceMapper;
+
+    @Resource
+    private RoleService roleService;
 
     @Override
     public int insert(Device model) {
@@ -57,8 +62,13 @@ public class DeviceServiceImpl extends GenericServiceImpl<Device, Long> implemen
 
     @Override
     public int getDeviceCountByState(int state) {
+        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
+        if (user == null || user.getCompanyid() == null)
+            return 0;
         DeviceExample example = new DeviceExample();
         example.createCriteria().andStateEqualTo(state);
+        if (!hasRole("manufactor"))
+            example.createCriteria().andCompanyidEqualTo(user.getCompanyid());
         return deviceMapper.countByExample(example);
     }
 
@@ -68,8 +78,24 @@ public class DeviceServiceImpl extends GenericServiceImpl<Device, Long> implemen
         if (user == null || user.getCompanyid() == null)
             return null;
         DeviceExample example = new DeviceExample();
-        example.createCriteria().andCompanyidEqualTo(user.getCompanyid());
+        if (!hasRole("manufactor"))
+            example.createCriteria().andCompanyidEqualTo(user.getCompanyid());
         return deviceMapper.selectByExample(example);
+    }
+
+    private boolean hasRole(String roleName) {
+        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
+        if (user == null || user.getCompanyid() == null)
+            return false;
+        final List<Role> roleInfos = roleService.selectRolesByUserId(user.getId());
+        for (Role role : roleInfos) {
+            if (role != null) {
+                if (role.getRoleName().contains(roleName))
+                    return true;
+            }
+        }
+
+        return false;
     }
 
 

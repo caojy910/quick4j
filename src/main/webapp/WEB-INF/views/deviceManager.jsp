@@ -13,39 +13,41 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div class="table-toolbar">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="btn-group">
-                                    <a id="sample_editable_1_new" class="btn sbold green" href="#adddevice" data-toggle="modal"> 添加设备
-                                        <i class="fa fa-plus"></i>
-                                    </a>
+
+                    <shiro:hasAnyRoles name="super_admin,admin,user">
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a id="sample_editable_1_new" class="btn sbold green" href="#adddevice" data-toggle="modal"> 添加设备
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="btn-group pull-right">
-                                    <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="javascript:;">
-                                                <i class="fa fa-print"></i> Print </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                                        </li>
-                                    </ul>
+                                <div class="col-md-6">
+                                    <div class="btn-group pull-right">
+                                        <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                                            <i class="fa fa-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <i class="fa fa-print"></i> Print </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal fade" id="adddevice" tabindex="-1" role="adddevice" aria-hidden="true">
+                        <div class="modal fade" id="adddevice" tabindex="-1" role="adddevice" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -121,6 +123,7 @@
                         </div>
                         <!-- /.modal-dialog -->
                     </div>
+                    </shiro:hasAnyRoles>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
                         <thead>
                         <tr>
@@ -138,7 +141,9 @@
                             <th> 运维期限 </th>
                             <th> 设备品牌 </th>
                             <th> 设备型号 </th>
-                            <th> 操作 </th>
+                            <shiro:hasAnyRoles name="super_admin,admin,user">
+                                <th> 操作 </th>
+                            </shiro:hasAnyRoles>
                         </tr>
                         </thead>
                         <tbody>
@@ -158,10 +163,13 @@
                                         <td>${device.enddate}</td>
                                         <td>${device.brand}</td>
                                         <td>${device.version}</td>
-                                        <td><button id="device_update" onclick="modifydevice(this)">修改</button>
-                                            <button id="device_delete" onclick="deletedevice(this)">删除</button>
-                                            <button id="device_record" onclick="showrecord(this)">记录</button>
-                                        </td>
+                                        <shiro:hasAnyRoles name="super_admin,admin,user">
+                                            <td><button id="device_update" onclick="modifydevice(this)">修改</button>
+                                                <button id="device_delete" onclick="deletedevice(this)">删除</button>
+                                                <button id="device_record" onclick="showrecord(this)">记录</button>
+                                            </td>
+                                        </shiro:hasAnyRoles>
+
                                     </tr>
                                 </c:forEach>
                         </tbody>

@@ -1,7 +1,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page language="java" pageEncoding="utf-8"%>
-<shiro:hasAnyRoles name="super_admin">
-<div class="row">
+<shiro:hasAnyRoles name="super_admin,manufactor">
+    <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="dashboard-stat blue">
             <div class="visual">
@@ -30,7 +30,8 @@
     </div>
 </div>
 </shiro:hasAnyRoles>
-<div class="row">
+<shiro:lacksRole name="manufactor">
+    <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="dashboard-stat purple">
             <div class="visual">
@@ -58,6 +59,7 @@
         </div>
     </div>
 </div>
+</shiro:lacksRole>
 
 <script type="text/javascript" src="app/js/myjs.js"></script>
 

@@ -185,26 +185,37 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </li>
                         </shiro:hasAnyRoles>
 
-                        <li class="">
-                            <a href="rest/page/historyJobManager" id="btn-job">
-                                <i class="fa fa-gears"></i><span class="title"> 工单管理 </span><span
-                                    class="arrow "> </span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="rest/page/historyJobManager" id="btn-job-done">
-                                        历史工单
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="rest/page/todoJobManager" id="btn-job-doing">
-                                        待完成工单
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <shiro:hasAnyRoles name="super_admin,admin,user">
+                            <li class="">
+                                <a href="rest/page/historyJobManager" id="btn-job">
+                                    <i class="fa fa-gears"></i><span class="title"> 工单管理 </span><span
+                                        class="arrow "> </span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="rest/page/historyJobManager" id="btn-job-done">
+                                            历史工单
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="rest/page/todoJobManager" id="btn-job-doing">
+                                            待完成工单
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </shiro:hasAnyRoles>
 
-                        <%--<li class="">--%>
+                        <shiro:hasAnyRoles name="manufactor">
+                            <li class="">
+                                <a href="rest/page/deviceManager" id="btn-device-manufactor">
+                                    <i class="fa fa-gears"></i><span class="title"> 设备台账 </span><span
+                                        class="arrow "> </span>
+                                </a>
+                            </li>
+                        </shiro:hasAnyRoles>
+
+                    <%--<li class="">--%>
                             <%--<a href="rest/page/rtc" id="btn-remoteassist">--%>
                                 <%--<i class="fa fa-home"></i><span class="title"> 远程协助 </span><span--%>
                                     <%--class="arrow "> </span>--%>
