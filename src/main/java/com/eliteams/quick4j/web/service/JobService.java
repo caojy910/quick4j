@@ -21,4 +21,8 @@ public interface JobService extends GenericService<Job, Long> {
     List<Job> getHistoryJobs();
 
     List<Job> getTodoJobs();
+
+    List<Job> getDoingJobs();
+
+    boolean updateJobstateById(Long id, int jobstate);
 }

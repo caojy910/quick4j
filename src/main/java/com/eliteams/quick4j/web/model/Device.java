@@ -6,6 +6,8 @@ import java.util.Date;
 public class Device {
     private Long id;
 
+    private Integer number;
+
     private String name;
 
     private Long companyid;
@@ -22,12 +24,24 @@ public class Device {
 
     private String version;
 
+    private Long manufactorid;
+
+    private Long customerid;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public String getName() {
@@ -98,5 +112,21 @@ public class Device {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public Long getManufactorid() {
+        return manufactorid;
+    }
+
+    public void setManufactorid(Long manufactorid) {
+        this.manufactorid = manufactorid;
+    }
+
+    public Long getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(Long customerid) {
+        this.customerid = customerid;
     }
 }

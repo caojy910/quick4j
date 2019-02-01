@@ -178,6 +178,9 @@
                             <th> 现场工程师 </th>
                             <th> 专家工程师 </th>
                             <th> 设备状态 </th>
+                            <%--<shiro:hasAnyRoles name="user">--%>
+                                <th> 操作 </th>
+                            <%--</shiro:hasAnyRoles>--%>
                             <th> 远程协助 </th>
                         </tr>
                         </thead>
@@ -199,7 +202,8 @@
                                 <td>${job.description}</td>
                                 <td>${job.localengineerName}</td>
                                 <td>${job.remoteengineerName}</td>
-                                <td>${job.jobstate}</td>
+                                <td>${job.jobStateName}</td>
+                                <td><button id="job_operator" onclick="operateJob(this,${job.jobstate})">${job.oprationName}</button></td>
                                 <td><a href="rest/page/rtc?jobid=${job.id}" target="_blank">开始协助</a></td>
                             </tr>
                         </c:forEach>

@@ -208,6 +208,20 @@ public class PageController {
         return mav;
     }
 
+    @RequestMapping("/doingJobManager")
+    public ModelAndView doingJobManager() {
+        List<Job> joblist = jobService.getDoingJobs();
+        setJobEngineerName(joblist);
+        List<Company> companyList = companyService.getCompanyList();
+        List<Device> devices = deviceService.getDevices();
+
+        ModelAndView mav=new ModelAndView("jobManager");
+        mav.addObject("jobList", joblist);
+        mav.addObject("companies", companyList);
+        mav.addObject("devices", devices);
+        return mav;
+    }
+
     private void setJobEngineerName(List<Job> joblist) {
         if (joblist != null) {
             for (Job job : joblist) {
@@ -224,7 +238,7 @@ public class PageController {
     private void setDeviceCompanyName(List<Device> list) {
         if (list != null) {
             for (Device deviceItem : list) {
-                if (deviceItem != null) {
+                if (deviceItem != null && deviceItem.getCompanyid() != null) {
                     deviceItem.setCompanyName(companyService.getComanyNameById(deviceItem.getCompanyid()));
                 }
             }
@@ -366,5 +380,10 @@ public class PageController {
         List<Oprecord> list = oprecordService.getOprecordListByDeviceId(deviceid);
         resultMap.put("result", list);
         return resultMap;
+    }
+
+    @RequestMapping(value = "/updatejobState", method = RequestMethod.POST)
+    public void updatejobState(@RequestParam("jobid") Long id, @RequestParam("jobstate") int jobstate) {
+        jobService.updateJobstateById(id, jobstate);
     }
 }

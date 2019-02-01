@@ -481,3 +481,80 @@ function clickanother(ref) {
     another.click();
 }
 
+function operateJob(obj, jobstate) {
+    var res;
+    if (jobstate == 0)
+        res = confirm('是否要开始工作？');
+    else if (jobstate == 1)
+        res = confirm('是否要结束工作？');
+    if(res == true)
+    {
+        var id = $(obj).parents('tr').children().eq(1).text();
+        var jobstatenameView = $(obj).parents('tr').children().eq(10);
+        if (jobstate == 0) {
+            updatejobState(id, 1);
+            jobstatenameView.val('进行中');
+        }
+        else if (jobstate == 1) {
+            updatejobState(id, 2);
+            jobstatenameView.val('已完成');
+        }
+    }
+}
+
+function updatejobState(id, jobstate) {
+    $.ajax({
+        //提交数据的类型 POST GET
+        type:"POST",
+        //提交的网址
+        url:"rest/page/updatejobState",
+        //提交的数据
+        data: {
+            jobid: id,
+            jobstate: jobstate
+        },
+        //返回数据的格式
+        datatype: "html",
+        //在请求之前调用的函数
+        beforeSend:function(){},
+        //成功返回之后调用的函数
+        success:function(data){
+        }   ,
+        //调用执行后调用的函数
+        complete: function(XMLHttpRequest, textStatus){
+            // $('#main-content').html(data);
+        },
+        //调用出错执行的函数
+        error: function(){
+            //请求出错处理
+        }
+    })
+}
+
+function endjob(id) {
+    $.ajax({
+        //提交数据的类型 POST GET
+        type:"POST",
+        //提交的网址
+        url:"rest/page/updatejobState",
+        //提交的数据
+        data: {
+            jobid: id
+        },
+        //返回数据的格式
+        datatype: "html",
+        //在请求之前调用的函数
+        beforeSend:function(){},
+        //成功返回之后调用的函数
+        success:function(data){
+        }   ,
+        //调用执行后调用的函数
+        complete: function(XMLHttpRequest, textStatus){
+            // $('#main-content').html(data);
+        },
+        //调用出错执行的函数
+        error: function(){
+            //请求出错处理
+        }
+    })
+}

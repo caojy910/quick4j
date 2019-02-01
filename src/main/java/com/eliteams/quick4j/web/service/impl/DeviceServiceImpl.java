@@ -57,29 +57,23 @@ public class DeviceServiceImpl extends GenericServiceImpl<Device, Long> implemen
 
     @Override
     public int getDeviceCount() {
-        return deviceMapper.countByExample(new DeviceExample());
+        DeviceExample example = new DeviceExample();
+        addRoleCondition(example);
+        return deviceMapper.countByExample(example);
     }
 
     @Override
     public int getDeviceCountByState(int state) {
-        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
-        if (user == null || user.getCompanyid() == null)
-            return 0;
         DeviceExample example = new DeviceExample();
         example.createCriteria().andStateEqualTo(state);
-        if (!hasRole("manufactor"))
-            example.createCriteria().andCompanyidEqualTo(user.getCompanyid());
+        addRoleCondition(example);
         return deviceMapper.countByExample(example);
     }
 
     @Override
     public List<Device> getDevices() {
-        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
-        if (user == null || user.getCompanyid() == null)
-            return null;
         DeviceExample example = new DeviceExample();
-        if (!hasRole("manufactor"))
-            example.createCriteria().andCompanyidEqualTo(user.getCompanyid());
+        addRoleCondition(example);
         return deviceMapper.selectByExample(example);
     }
 
@@ -98,5 +92,17 @@ public class DeviceServiceImpl extends GenericServiceImpl<Device, Long> implemen
         return false;
     }
 
-
+    private void addRoleCondition(DeviceExample example) {
+        if (example == null)
+            return;
+        User user = (User) SessionUtils.getRequest().getSession().getAttribute("userInfo");
+        if (user == null || user.getCompanyid() == null)
+            return;
+        if (hasRole("manufactor"))
+            example.createCriteria().andManufactoridEqualTo(user.getCompanyid());
+        else if (hasRole("customer"))
+            example.createCriteria().andCustomeridEqualTo(user.getCompanyid());
+        else
+            example.createCriteria().andCompanyidEqualTo(user.getCompanyid());
+    }
 }

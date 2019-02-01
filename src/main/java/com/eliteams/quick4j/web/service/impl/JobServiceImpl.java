@@ -68,11 +68,16 @@ public class JobServiceImpl extends GenericServiceImpl<Job, Long> implements Job
 
     @Override
     public List<Job> getHistoryJobs() {
-        return getJobListByJobState(0);
+        return getJobListByJobState(2);
     }
 
     @Override
     public List<Job> getTodoJobs() {
+        return getJobListByJobState(0);
+    }
+
+    @Override
+    public List<Job> getDoingJobs() {
         return getJobListByJobState(1);
     }
 
@@ -106,4 +111,17 @@ public class JobServiceImpl extends GenericServiceImpl<Job, Long> implements Job
         }
         return false;
     }
+
+    public boolean updateJobstateById(Long id, int jobstate) {
+        JobExample example = new JobExample();
+        example.createCriteria().andIdEqualTo(id);
+        List<Job> job = jobMapper.selectByExample(example);
+        for (Job curjob : job) {
+            curjob.setJobstate(jobstate);
+            jobMapper.updateByExample(curjob, example);
+        }
+
+        return true;
+    }
+
 }

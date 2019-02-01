@@ -29,6 +29,10 @@ public class Job {
 
     private Integer jobstate;
 
+    private String jobStateName;
+
+    private String oprationName;
+
     private Long companyid;
 
     public Long getId() {
@@ -112,6 +116,20 @@ public class Job {
 
     public void setJobstate(Integer jobstate) {
         this.jobstate = jobstate;
+        if (jobstate != null) {
+            if (jobstate == 0) {
+                jobStateName = "未开始";
+                oprationName = "开始";
+            }
+            else if (jobstate == 1) {
+                jobStateName = "进行中";
+                oprationName = "完成";
+            }
+            else if (jobstate == 2) {
+                jobStateName = "已完成";
+                oprationName = "查看";
+            }
+        }
     }
 
     public Long getCompanyid() {
@@ -136,5 +154,21 @@ public class Job {
 
     public void setRemoteengineerName(String remoteengineerName) {
         this.remoteengineerName = remoteengineerName;
+    }
+
+    public String getJobStateName() {
+        return jobStateName;
+    }
+
+    public void setJobStateName(String jobStateName) {
+        this.jobStateName = jobStateName;
+    }
+
+    public String getOprationName() {
+        return oprationName;
+    }
+
+    public void setOprationName(String oprationName) {
+        this.oprationName = oprationName;
     }
 }

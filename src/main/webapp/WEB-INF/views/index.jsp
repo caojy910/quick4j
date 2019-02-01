@@ -117,7 +117,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </a>
                         </li>
 
-                        <shiro:hasAnyRoles name="super_admin">
+                        <shiro:hasAnyRoles name="super_admin, manufactor, customer">
                             <li class="">
                                 <a href="rest/page/deviceManager" id="btn-device">
                                     <i class="fa fa-gears"></i><span class="title"> 客户设备台账 </span><span
@@ -198,20 +198,16 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="rest/page/todoJobManager" id="btn-job-doing">
-                                            待完成工单
+                                        <a href="rest/page/todoJobManager" id="btn-job-waiting">
+                                            未开始工单
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="rest/page/doingJobManager" id="btn-job-doing">
+                                            进行中工单
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
-                        </shiro:hasAnyRoles>
-
-                        <shiro:hasAnyRoles name="manufactor">
-                            <li class="">
-                                <a href="rest/page/deviceManager" id="btn-device-manufactor">
-                                    <i class="fa fa-gears"></i><span class="title"> 设备台账 </span><span
-                                        class="arrow "> </span>
-                                </a>
                             </li>
                         </shiro:hasAnyRoles>
 

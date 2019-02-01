@@ -165,6 +165,66 @@ public class DeviceExample {
             return (Criteria) this;
         }
 
+        public Criteria andNumberIsNull() {
+            addCriterion("number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIsNotNull() {
+            addCriterion("number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberEqualTo(Integer value) {
+            addCriterion("number =", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotEqualTo(Integer value) {
+            addCriterion("number <>", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberGreaterThan(Integer value) {
+            addCriterion("number >", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("number >=", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLessThan(Integer value) {
+            addCriterion("number <", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("number <=", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIn(List<Integer> values) {
+            addCriterion("number in", values, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotIn(List<Integer> values) {
+            addCriterion("number not in", values, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberBetween(Integer value1, Integer value2) {
+            addCriterion("number between", value1, value2, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("number not between", value1, value2, "number");
+            return (Criteria) this;
+        }
+
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -612,6 +672,126 @@ public class DeviceExample {
 
         public Criteria andVersionNotBetween(String value1, String value2) {
             addCriterion("version not between", value1, value2, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridIsNull() {
+            addCriterion("manufactorid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridIsNotNull() {
+            addCriterion("manufactorid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridEqualTo(Long value) {
+            addCriterion("manufactorid =", value, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridNotEqualTo(Long value) {
+            addCriterion("manufactorid <>", value, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridGreaterThan(Long value) {
+            addCriterion("manufactorid >", value, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridGreaterThanOrEqualTo(Long value) {
+            addCriterion("manufactorid >=", value, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridLessThan(Long value) {
+            addCriterion("manufactorid <", value, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridLessThanOrEqualTo(Long value) {
+            addCriterion("manufactorid <=", value, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridIn(List<Long> values) {
+            addCriterion("manufactorid in", values, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridNotIn(List<Long> values) {
+            addCriterion("manufactorid not in", values, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridBetween(Long value1, Long value2) {
+            addCriterion("manufactorid between", value1, value2, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andManufactoridNotBetween(Long value1, Long value2) {
+            addCriterion("manufactorid not between", value1, value2, "manufactorid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridIsNull() {
+            addCriterion("customerid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridIsNotNull() {
+            addCriterion("customerid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridEqualTo(Long value) {
+            addCriterion("customerid =", value, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridNotEqualTo(Long value) {
+            addCriterion("customerid <>", value, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridGreaterThan(Long value) {
+            addCriterion("customerid >", value, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridGreaterThanOrEqualTo(Long value) {
+            addCriterion("customerid >=", value, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridLessThan(Long value) {
+            addCriterion("customerid <", value, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridLessThanOrEqualTo(Long value) {
+            addCriterion("customerid <=", value, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridIn(List<Long> values) {
+            addCriterion("customerid in", values, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridNotIn(List<Long> values) {
+            addCriterion("customerid not in", values, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridBetween(Long value1, Long value2) {
+            addCriterion("customerid between", value1, value2, "customerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomeridNotBetween(Long value1, Long value2) {
+            addCriterion("customerid not between", value1, value2, "customerid");
             return (Criteria) this;
         }
     }

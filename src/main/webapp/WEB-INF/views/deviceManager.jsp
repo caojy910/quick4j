@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page import="com.eliteams.quick4j.web.dao.DeviceMapper" %>
 <%@ page import="com.eliteams.quick4j.web.model.DeviceExample" %>
 <%@ page language="java" pageEncoding="utf-8"%>

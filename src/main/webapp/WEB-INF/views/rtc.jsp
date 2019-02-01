@@ -170,6 +170,43 @@
 				border-radius: 20px;
 				padding: 2em;
 			}
+			.chatblock {
+				margin: 2em;
+				border: solid grey 6px;
+				border-radius: 20px;
+				padding: 2em;
+			}
+			.messageblock{
+				width: 100%;
+				height: 200px;
+				margin: 0.5em;
+				border: solid grey 2px;
+				background-color: white;
+				padding: 0.5em;
+				/*display: flex;*/
+				overflow-y:scroll;
+			}
+			.msginput {
+				width: 100%;
+				padding: 0.5em;
+				margin: 0.5em;
+			}
+			.msgsendbtn{
+				margin: 0.5em;
+				padding: 0.5em;
+				text-align:right;
+			}
+			.leftmsg {
+				width: 50%;
+				margin:1em auto 1em 0;
+				color:black;
+			}
+			.rightmsg {
+				width: 50%;
+				margin:1em 0 1em auto;
+				color:black;
+			}
+
 		</style>
 
 	</head>
@@ -184,44 +221,70 @@
 			</div>
 		</div>
 
-		<div class="screenshotblock">
-			<h2>截图标记</h2>
-			<div id="videoCanvas">
-				<div id="controls">
-					标记颜色：
-					<select id="strokeStyleSelect">
-						<option value="red" style="color:red">红色</option>
-						<option value="green" style="color:green">绿色</option>
-						<option value="blue" style="color:blue">蓝色</option>
-						<option value="orange" style="color:orange">橙色</option>
-					</select>
 
-					<input type="button" name="eraseAllButton" id="eraseAllButton" value="清除标记" />
-				</div>
+		<table width="100%">
+			<tr>
+				<td width="50%" height="100%" valign="top">
+					<div class="screenshotblock">
+						<h2>截图标记</h2>
+						<div id="videoCanvas">
+							<div id="controls">
+								标记颜色：
+								<select id="strokeStyleSelect">
+									<option value="red" style="color:red">红色</option>
+									<option value="green" style="color:green">绿色</option>
+									<option value="blue" style="color:blue">蓝色</option>
+									<option value="orange" style="color:orange">橙色</option>
+								</select>
 
-				<canvas id="photo"></canvas>
+								<input type="button" name="eraseAllButton" id="eraseAllButton" value="清除标记" />
+							</div>
 
-			</div>
+							<canvas id="photo"></canvas>
 
-			<div id="buttons">
-				<button id="snap">截屏</button><span>      </span><button id="send">发送图片</button>
-				<%--<span> or </span>--%>
-				<%--<button id="snapAndSend">Snap &amp; Send</button>--%>
-			</div>
+						</div>
 
-			<%--<div>--%>
-			<%----%>
-			<%--<div class="col-md-9">--%>
-			<%--<input type="text"><span>      </span><button id="sendmessage">发送消息</button>--%>
-			<%--</div>--%>
-			<%--</div>--%>
+						<div id="buttons">
+							<button id="snap">截屏</button><span>      </span><button id="send">发送图片</button>
+							<%--<span> or </span>--%>
+							<%--<button id="snapAndSend">Snap &amp; Send</button>--%>
+						</div>
+						<%--<div>--%>
+						<%----%>
+						<%--<div class="col-md-9">--%>
+						<%--<input type="text"><span>      </span><button id="sendmessage">发送消息</button>--%>
+						<%--</div>--%>
+						<%--</div>--%>
 
-		</div>
+					</div>
+				</td>
+				<td width="50%" height="100%" valign="top">
+					<div id="chat" class="chatblock">
+						<div id="message" class="messageblock"></div>
+						<%--<input type="text" class="form-control">--%>
+							<textarea class="scroll msginput" id="inputmsg" wrap="hard" placeholder="在此输入文字信息..."></textarea>
+							<span class="input-group-btn msgsendbtn">
+								<button id="sendmessage" type="button">发送</button>
+							</span>
+					</div>
+				</td>
+			</tr>
+		</table>
 
-		<div id="incoming" class="receiveblock">
-			<h2>接收图片</h2>
-			<div id="trail"></div>
-		</div>
+		<table width="100%">
+			<tr>
+				<td width="50%" valign="top">
+					<div id="incoming" class="receiveblock">
+						<h2>接收图片</h2>
+						<div id="trail"></div>
+					</div>
+				</td>
+				<td width="50%" valign="top">
+
+				</td>
+			</tr>
+		</table>
+
 
 		<%--<div id="footer"></div>--%>
 		<%--<a href="http://www.webrtc.org"> <img id="logo" alt="WebRTC"--%>
@@ -260,6 +323,9 @@
         var trail = document.getElementById('trail');
         var snapBtn = document.getElementById('snap');
         var sendBtn = document.getElementById('send');
+        var sendMsgBtn = document.getElementById('sendmessage');
+        var inputmsg = document.getElementById('inputmsg');
+        var msgwindow = document.getElementById('message');
         // var snapAndSendBtn = document.getElementById('snapAndSend');
 
         var photoContextW;
@@ -271,6 +337,7 @@
         // Attach event handlers
         snapBtn.addEventListener('click', snapPhoto);
         sendBtn.addEventListener('click', sendPhoto);
+        sendMsgBtn.addEventListener('click', sendmessagechatting);
         // snapAndSendBtn.addEventListener('click', snapAndSend);
 
         function initialize() {
@@ -382,8 +449,40 @@
 			path = 'message?r=' + roomKey + '&u=' + user;
 			var xhr = new XMLHttpRequest();
 			xhr.open('POST', path, true);
-			xhr.send(msgString);
+            xhr.onreadystatechange = sendMessageCallback;
+            xhr.send(msgString);
 		}
+
+		function sendMessageCallback() {
+            console.log(this);
+
+            console.log("sendMessageCallback");
+        }
+
+		function sendmessagechatting() {
+            if (!dataChannel) {
+                logError('chat Connection has not been initiated. ' +
+                    'Get two peers in the same room first');
+                return;
+            } else if (dataChannel.readyState === 'closed') {
+                logError('chat Connection was lost. Peer closed the connection.');
+                return;
+            }
+
+            var msg = inputmsg.value;
+            console.log("msg:" + msg);
+            dataChannel.send("msg:" + msg);
+            msg = msg.replace(/msg:/,"");
+            insertMsgToChatWindow(0, msg);
+        }
+
+        function insertMsgToChatWindow(remote, msg) {
+            if (remote) {
+                $("#message").append("<p class='leftmsg'>" + msg + "</p>");
+			}
+			else
+                $("#message").append("<p class='rightmsg'>" + msg + "</p>");
+        }
 
 		function join() {
 			path = 'room?r=' + ${jobid};
@@ -514,8 +613,17 @@
             var buf, count;
 			console.log("receiveDataChromeFactory");
             return function onmessage(event) {
+                console.log(event);
+                console.log(event.data);
                 if (typeof event.data === 'string') {
-                    buf = window.buf = new Uint8ClampedArray(parseInt(event.data));
+                    var msg = event.data;
+                    if (msg.match("msg:") != null) {
+                        msg = msg.replace(/msg:/,"");
+                        console.log(msg);
+                        insertMsgToChatWindow(1, msg);
+                        return;
+					}
+                    buf = window.buf = new Uint8ClampedArray(parseInt(msg));
                     count = 0;
                     console.log('Expecting a total of ' + buf.byteLength + ' bytes');
                     return;
