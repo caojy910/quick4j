@@ -180,6 +180,7 @@
                             <th> 设备状态 </th>
                             <%--<shiro:hasAnyRoles name="user">--%>
                                 <th> 操作 </th>
+                                <th> 记录 </th>
                             <%--</shiro:hasAnyRoles>--%>
                             <th> 远程协助 </th>
                         </tr>
@@ -204,6 +205,10 @@
                                 <td>${job.remoteengineerName}</td>
                                 <td>${job.jobStateName}</td>
                                 <td><button id="job_operator" onclick="operateJob(this,${job.jobstate})">${job.oprationName}</button></td>
+                                <td>
+                                    <button id="job_showrecord" onclick="showjobrecord(this,${job.localengineerid})">查看</button>
+                                    <button id="job_record" href="#jobrecord" data-toggle="modal">记录</button>
+                                </td>
                                 <td><a href="rest/page/rtc?jobid=${job.id}" target="_blank">开始协助</a></td>
                             </tr>
                         </c:forEach>
@@ -214,6 +219,66 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="jobrecord" tabindex="-1" role="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Modal Title</h4>
+            </div>
+            <div class="modal-body">
+                <form id="jobrecordsub" class="form-horizontal form-bordered" action="rest/page/addjobrecord" method="post" onsubmit="return ajaxsubmitaddjob();">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">操作类型</label>
+                            <div class="col-md-4">
+                                <select name="type" id="form_job_type">
+                                    <option value="0">运维操作</option>
+                                    <option value="1">更换耗材</option>
+                                </select>
+                                <%--<input type="text" class="form-control" maxlength="25" name="type" id="form_job_type">--%>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">操作内容</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" maxlength="25" name="desc" id="form_job_operate_content">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">操作时间</label>
+                            <div class="col-md-9">
+                                <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                                    <input type="text" class="form-control" readonly="" name="finishtime" id="form_job_operatetime">
+                                    <span class="input-group-btn">
+                                                            <button class="btn default" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn green" type="submit">
+                                    <i class="fa fa-check"></i> Submit</button>
+                                <a href="javascript:;" class="btn btn-outline grey-salsa" data-dismiss="modal">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div id="dialogSelect" style="padding-top:20px;"></div>
+
 <script src="assets/global/scripts/datatable.js" type="text/javascript"></script>
 <script src="assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
@@ -225,6 +290,7 @@
 
 <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
+<script src="assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 
 <script src="assets/global/plugins/moment.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>

@@ -377,13 +377,31 @@ public class PageController {
     @ResponseBody
     public Map<String, Object> getoprecord(@RequestParam("deviceid")  Long deviceid, HttpServletRequest request) {
         Map<String, Object> resultMap =  new HashMap<String,Object>();
-        List<Oprecord> list = oprecordService.getOprecordListByDeviceId(deviceid);
+        List<Oprecord> list = oprecordService.getOprecordListByDeviceId(deviceid, null);
         resultMap.put("result", list);
         return resultMap;
     }
 
+    @RequestMapping("/getoprecordByEngineer")
+    @ResponseBody
+    public Map<String, Object> getoprecordByEngineer(@RequestParam("deviceid")  Long deviceid,
+                                                     @RequestParam("engineerid")  Long engineerid, HttpServletRequest request) {
+        Map<String, Object> resultMap =  new HashMap<String,Object>();
+        List<Oprecord> list = oprecordService.getOprecordListByDeviceId(deviceid, engineerid);
+        resultMap.put("result", list);
+        return resultMap;
+    }
+
+
     @RequestMapping(value = "/updatejobState", method = RequestMethod.POST)
     public void updatejobState(@RequestParam("jobid") Long id, @RequestParam("jobstate") int jobstate) {
         jobService.updateJobstateById(id, jobstate);
+    }
+
+    @RequestMapping(value = "/addjobrecord", method = RequestMethod.POST)
+    public void addjobrecord(@RequestParam("jobid") Long id, @RequestParam("optype") int optype,
+                             @RequestParam("opContent") String content, @RequestParam("optime") String optime) {
+        Job job = jobService.selectById(id);
+
     }
 }

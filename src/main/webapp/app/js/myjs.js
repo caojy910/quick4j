@@ -84,7 +84,7 @@ function addlocalengineer() {
     return false;
 }
 
-function ajaxsubmitaddjob() {
+function ajaxsubmitaddjobrecord() {
     $.ajax({
             //提交数据的类型 POST GET
             type:"POST",
@@ -250,6 +250,74 @@ function showrecord(obj) {
                 }
                 content += " </tbody></table>";
                 $('#dialogSelect').html(content);
+
+            $('#dialogSelect').dialog({
+                autoOpen: false,modal:true,width:600,height:400,title:"设备操作记录",
+                buttons: {
+                    "关闭": function() { $(this).dialog("close"); }
+                }
+            });
+
+            $('#dialogSelect').dialog("open");
+        }   ,
+        //调用执行后调用的函数
+        complete: function(XMLHttpRequest, textStatus){
+            // alert(XMLHttpRequest);
+            // $('#main-content').html(data);
+        },
+        //调用出错执行的函数
+        error: function(){
+            //请求出错处理
+        }
+    })
+}
+
+function showjobrecord(obj, engineerid) {
+    var id = $(obj).parents('tr').children().eq(4).text();
+    $.ajax({
+        //提交数据的类型 POST GET
+        type:"POST",
+        //提交的网址
+        url:"rest/page/getoprecordByEngineer",
+        //提交的数据
+        data: {
+            deviceid: id,
+            engineerid: engineerid
+        },
+        //返回数据的格式
+        datatype: "json",
+        //在请求之前调用的函数
+        beforeSend:function(){},
+        //成功返回之后调用的函数
+        success:function(data){
+            var content = "<table class=\"table table-striped table-bordered table-hover table-checkable order-column\"> \
+                <thead> \
+                    <tr> \
+                        <th>编号</th> \
+                        <th>设备编号</th> \
+                        <th>操作员</th> \
+                        <th>操作时间</th> \
+                        <th>内容</th> \
+                        <th>类型</th> \
+                    </tr> \
+                </thead> \
+                <tbody> \
+                ";
+            for (var i = 0; i < data.result.length; i++) {
+                content += "<tr class=\"odd gradeX\">"
+                content += "<td>" + data.result[i].id + "</td>";
+                content += "<td>" + data.result[i].deciveid + "</td>";
+                content += "<td>" + data.result[i].opengineer + "</td>";
+                content += "<td>" + data.result[i].opdate + "</td>";
+                content += "<td>" + data.result[i].opcontent + "</td>";
+                if (data.result[i].type == 0)
+                    content += "<td>" + "运维操作" + "</td>";
+                else if (data.result[i].type == 1)
+                    content += "<td>" + "更换耗材" + "</td>";
+                content += "</tr>"
+            }
+            content += " </tbody></table>";
+            $('#dialogSelect').html(content);
 
             $('#dialogSelect').dialog({
                 autoOpen: false,modal:true,width:600,height:400,title:"设备操作记录",

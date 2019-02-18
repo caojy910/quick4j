@@ -185,6 +185,7 @@
 				padding: 0.5em;
 				/*display: flex;*/
 				overflow-y:scroll;
+				word-wrap:break-word;
 			}
 			.msginput {
 				width: 100%;
@@ -197,14 +198,20 @@
 				text-align:right;
 			}
 			.leftmsg {
-				width: 50%;
+				width: 48%;
 				margin:1em auto 1em 0;
 				color:black;
+				background-color: gainsboro;
+				border-radius: 5px;
+				padding: 3px;
 			}
 			.rightmsg {
-				width: 50%;
+				width: 48%;
 				margin:1em 0 1em auto;
 				color:black;
+				background-color: #2fff56;
+				border-radius: 5px;
+				padding: 3px;
 			}
 
 		</style>
@@ -482,6 +489,8 @@
 			}
 			else
                 $("#message").append("<p class='rightmsg'>" + msg + "</p>");
+            var div = document.getElementById('message');
+            div.scrollTop = div.scrollHeight;
         }
 
 		function join() {

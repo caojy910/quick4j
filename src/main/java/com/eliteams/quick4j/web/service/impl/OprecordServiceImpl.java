@@ -44,9 +44,11 @@ public class OprecordServiceImpl extends GenericServiceImpl<Oprecord, Long> impl
     }
 
     @Override
-    public List<Oprecord> getOprecordListByDeviceId(Long id) {
+    public List<Oprecord> getOprecordListByDeviceId(Long id, Long engineerid) {
         OprecordExample example = new OprecordExample();
-        example.createCriteria().andDeciveidEqualTo(id);
+        OprecordExample.Criteria criteria = example.createCriteria().andDeciveidEqualTo(id);
+        if (engineerid != null)
+            criteria.andOpengineerEqualTo(engineerid);
         return oprecordMapper.selectByExample(example);
     }
 
