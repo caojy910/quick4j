@@ -474,6 +474,66 @@ public class OprecordExample {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
+
+        public Criteria andJobidIsNull() {
+            addCriterion("jobid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidIsNotNull() {
+            addCriterion("jobid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidEqualTo(Long value) {
+            addCriterion("jobid =", value, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidNotEqualTo(Long value) {
+            addCriterion("jobid <>", value, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidGreaterThan(Long value) {
+            addCriterion("jobid >", value, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidGreaterThanOrEqualTo(Long value) {
+            addCriterion("jobid >=", value, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidLessThan(Long value) {
+            addCriterion("jobid <", value, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidLessThanOrEqualTo(Long value) {
+            addCriterion("jobid <=", value, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidIn(List<Long> values) {
+            addCriterion("jobid in", values, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidNotIn(List<Long> values) {
+            addCriterion("jobid not in", values, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidBetween(Long value1, Long value2) {
+            addCriterion("jobid between", value1, value2, "jobid");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobidNotBetween(Long value1, Long value2) {
+            addCriterion("jobid not between", value1, value2, "jobid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -16,6 +16,8 @@ public class Oprecord {
 
     private Integer type;
 
+    private Long jobid;
+
     public Long getId() {
         return id;
     }
@@ -65,5 +67,13 @@ public class Oprecord {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Long getJobid() {
+        return jobid;
+    }
+
+    public void setJobid(Long jobid) {
+        this.jobid = jobid;
     }
 }

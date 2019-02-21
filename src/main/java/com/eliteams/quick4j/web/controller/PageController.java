@@ -399,9 +399,23 @@ public class PageController {
     }
 
     @RequestMapping(value = "/addjobrecord", method = RequestMethod.POST)
-    public void addjobrecord(@RequestParam("jobid") Long id, @RequestParam("optype") int optype,
-                             @RequestParam("opContent") String content, @RequestParam("optime") String optime) {
-        Job job = jobService.selectById(id);
+    public void addjobrecord(@RequestParam("jobid") Long jobid, @RequestParam("optype") int optype,
+                             @RequestParam("opContent") String opContent, @RequestParam("optime") String optime) {
+        Job job = jobService.selectById(jobid);
+        Oprecord oprecord = new Oprecord();
+        oprecord.setJobid(jobid);
+        oprecord.setDeciveid(job.getDeciveid());
+        oprecord.setOpcontent(opContent);
+        oprecord.setType(optype);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+        try {
+            oprecord.setOpdate(sdf.parse(optime));
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        oprecord.setOpengineer(job.getLocalengineerid());
+        oprecordService.insert(oprecord);
     }
 }

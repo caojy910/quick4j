@@ -207,7 +207,7 @@
                                 <td><button id="job_operator" onclick="operateJob(this,${job.jobstate})">${job.oprationName}</button></td>
                                 <td>
                                     <button id="job_showrecord" onclick="showjobrecord(this,${job.localengineerid})">查看</button>
-                                    <button id="job_record" href="#jobrecord" data-toggle="modal">记录</button>
+                                    <button id="job_record" href="#jobrecord" data-toggle="modal" data-jobid=${job.id}>记录</button>
                                 </td>
                                 <td><a href="rest/page/rtc?jobid=${job.id}" target="_blank">开始协助</a></td>
                             </tr>
@@ -227,12 +227,18 @@
                 <h4 class="modal-title">Modal Title</h4>
             </div>
             <div class="modal-body">
-                <form id="jobrecordsub" class="form-horizontal form-bordered" action="rest/page/addjobrecord" method="post" onsubmit="return ajaxsubmitaddjob();">
+                <form id="jobrecordsub" class="form-horizontal form-bordered" action="rest/page/addjobrecord" method="post" onsubmit="return ajaxsubmitaddjobrecord();">
                     <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">工单id</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" maxlength="25" name="desc" readonly id="form_job_id_unchanged">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">操作类型</label>
                             <div class="col-md-4">
-                                <select name="type" id="form_job_type">
+                                <select name="type" id="form_job_optype">
                                     <option value="0">运维操作</option>
                                     <option value="1">更换耗材</option>
                                 </select>
@@ -298,3 +304,15 @@
 
 <script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+
+<script>
+    $('#jobrecord').on('show.bs.modal', function (event) {
+    var a = $(event.relatedTarget) // relatedTarget 事件属性返回与事件的目标节点相关的节点。
+    var jobid = a.context.dataset.jobid;
+    /*title = a.data('title'), description = a.data('description');*/
+    var modal = $(this)
+    modal.find('#form_job_id_unchanged').val(jobid);
+    /* modal.find('#cm-modal-title').val(title);
+    modal.find('#cm-modal-content').val(description);*/
+    });
+</script>
